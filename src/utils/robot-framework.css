@@ -1,0 +1,165 @@
+/* Robot Framework syntax highlighting styles for CodeMirror */
+.cm-s-robot {
+  font-family: monospace;
+}
+
+/* Ensure all CodeMirror elements preserve whitespace and prevent wrapping */
+.cm-s-robot .cm-section,
+.cm-s-robot .cm-setting,
+.cm-s-robot .cm-keyword,
+.cm-s-robot .cm-variable,
+.cm-s-robot .cm-def,
+.cm-s-robot .cm-parameter,
+.cm-s-robot .cm-argument,
+.cm-s-robot .cm-argument-separator,
+.cm-s-robot .cm-header,
+.cm-s-robot .cm-builtin,
+.cm-s-robot .cm-string,
+.cm-s-robot .cm-comment,
+.cm-s-robot .cm-gherkin,
+.cm-s-robot .cm-meta,
+.cm-s-robot .cm-number,
+.cm-s-robot .cm-operator,
+.cm-s-robot .cm-bracket,
+.cm-s-robot .cm-atom {
+  white-space: pre !important;
+  word-break: keep-all !important;
+  -webkit-hyphens: none !important;
+  -ms-hyphens: none !important;
+  hyphens: none !important;
+}
+
+/* Additional fix for CodeMirror line content */
+.CodeMirror-line {
+  white-space: pre !important;
+}
+
+/* Basic CodeMirror styles */
+.cm-s-robot .cm-link {
+  color: #0000FF;
+  text-decoration: underline;
+}
+
+.cm-s-robot .cm-error {
+  background: #FF0000;
+  color: #FFFFFF;
+}
+
+/* Robot Framework specific syntax highlighting */
+
+/* Section headers like *** Test Cases ***, *** Keywords ***, *** Variables *** */
+.cm-s-robot .cm-section {
+  color: #0000FF;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+/* Settings like [Documentation], [Tags], [Setup], etc. */
+.cm-s-robot .cm-setting {
+  color: #0000FF;
+  font-weight: bold;
+}
+
+/* Keywords (built-in and user-defined) */
+.cm-s-robot .cm-keyword {
+  color: #708;
+  font-weight: bold;
+}
+
+/* Variables like ${VAR}, @{LIST}, &{DICT} */
+.cm-s-robot .cm-variable {
+  color: #008080;
+}
+
+/* Strings (text in quotes) */
+.cm-s-robot .cm-string {
+  color: #F90000;
+}
+
+/* Comments starting with # */
+.cm-s-robot .cm-comment {
+  color: #A50;
+  font-style: italic;
+}
+
+/* Gherkin syntax: Given, When, Then, And, But */
+.cm-s-robot .cm-gherkin {
+  color: #0000FF;
+  font-weight: bold;
+}
+
+/* Built-in variables like ${TEMPDIR}, ${EXECDIR} */
+.cm-s-robot .cm-builtin {
+  color: #800080;
+  font-weight: bold;
+}
+
+/* Metadata like Library, Resource, Variables */
+.cm-s-robot .cm-meta {
+  color: #800080;
+  font-weight: bold;
+}
+
+/* Test case and keyword names */
+.cm-s-robot .cm-def {
+  color: #0000FF;
+  font-weight: bold;
+}
+
+/* Numbers */
+.cm-s-robot .cm-number {
+  color: #0000FF;
+}
+
+/* Operators */
+.cm-s-robot .cm-operator {
+  color: #000000;
+}
+
+/* Brackets */
+.cm-s-robot .cm-bracket {
+  color: #000000;
+}
+
+/* Atoms (True, False, None) */
+.cm-s-robot .cm-atom {
+  color: #0000FF;
+}
+
+/* Parameter separator - 4 spaces to separate arguments */
+.cm-s-robot .cm-parameter {
+  color: #000000;
+  margin-left: 4px;
+}
+
+/* Special handling for Robot Framework parameters */
+.cm-s-robot .cm-argument {
+  color: #000000;
+}
+
+/* Handle multiple arguments separated by 4 spaces */
+.cm-s-robot .cm-argument-separator {
+  color: #000000;
+}
+
+/* Ensure proper spacing between elements */
+.cm-s-robot .cm-line {
+  white-space: pre;
+}
+
+/* Handle line breaks properly */
+.cm-s-robot .cm-line-break {
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Header lines like *** Test Cases *** */
+.cm-s-robot .cm-header {
+  color: #0000FF;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
