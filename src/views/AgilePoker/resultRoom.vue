@@ -23,37 +23,37 @@
         </div>
       </div>
       <div class="container-right bg-color-1">
-        <div class="title-1">出牌统计</div>
+        <section class="flex default-btn-content">
+          <div class="title-1">出牌统计</div>
+          <div v-if="data.status == 0" class="default-btn">保存故事点</div>
+          <div v-if="data.status == 1" class="opt-default-btn" @click="handleSavePoint(data.mostCardValue)">保存故事点
+          </div>
+        </section>
         <div class="info-content">
-          <div class="info-item jus-start-center">
+          <div class="info-item jus-bet-end">
             <div class="info-lable">有效出牌人数</div>
             <div class="info-val">{{ data.pepCount }}</div>
           </div>
-          <div class="info-item jus-start-center">
+          <div class="info-item jus-bet-end">
             <div class="info-lable">达标阈值</div>
             <div class="info-val" style="font-weight:bold">{{ data.standardThreshold }}</div>
           </div>
-          <div class="info-item jus-start-center">
+          <div class="info-item jus-bet-end">
             <div class="info-lable">共识需得票数</div>
             <div class="info-val">{{ data.needTicketCount }}</div>
           </div>
-          <div class="info-item jus-start-center">
+          <div class="info-item jus-bet-end">
             <div class="info-lable">当前阈值</div>
             <div :class="data.status == 1 ? 'text-blue' : 'text-red'" class="info-val">{{ data.localThreshold }}
             </div>
           </div>
-          <div class="info-item jus-start-center">
+          <div class="info-item jus-bet-end">
             <div class="info-lable">出牌均值</div>
             <div class="info-val">{{ data.ave }}</div>
           </div>
-          <div class="info-item jus-start-center">
+          <div class="info-item jus-bet-end">
             <div class="info-lable">共识牌面</div>
-            <div class="info-more jus-bet-center">
-              <div class="info-val">{{ data.mostCardValue }}</div>
-              <div v-if="data.status == 0" class="default-btn">保存故事点</div>
-              <div v-if="data.status == 1" class="opt-btn" @click="handleSavePoint(data.mostCardValue)">保存故事点
-              </div>
-            </div>
+            <div class="info-val">{{ data.mostCardValue }}</div>
           </div>
         </div>
         <div class="title-1" style="margin-bottom:12px;margin-top: 12px">牌面分布</div>
@@ -168,7 +168,7 @@ onBeforeMount(async () => {
 <style lang="scss" scoped>
 .room-content {
   .page-header {
-    margin: 20px 0;
+    margin: 0 0 12px;
 
     .title-icon {
       width: 20px;
@@ -186,7 +186,7 @@ onBeforeMount(async () => {
       padding: 30px 20px;
       width: calc(100% - 450px);
       border-radius: 8px;
-      height: calc(100vh - 200px);
+      height: calc(100vh - 250px);
 
       .joker-list {
         width: 100%;
@@ -224,12 +224,12 @@ onBeforeMount(async () => {
       width: 430px;
       padding: 20px;
       border-radius: 8px;
-      height: calc(100vh - 200px);
+      height: calc(100vh - 250px);
     }
 
     .info-content {
       margin-top: 12px;
-      padding: 12px;
+      padding: 12px 24px;
       background: #fff;
       border-radius: 8px;
 
@@ -240,15 +240,15 @@ onBeforeMount(async () => {
           width: 150px;
           font-family: PingFang SC;
           font-weight: 500;
-          font-size: 16px;
-          color: #877c7c;
+          font-size: 14px;
+          color: #666;
         }
 
         .info-val {
           font-family: PingFang SC;
           font-weight: 400;
-          font-size: 20px;
-          color: #1d1d1d;
+          font-size: 14px;
+          color: #333;
         }
 
         .text-red {
@@ -264,19 +264,37 @@ onBeforeMount(async () => {
         .info-more {
           width: 200px;
         }
-
-        .default-btn {
-          padding: 5px 20px;
-          background: #d3d0d0;
-          border-radius: 4px;
-          font-family: PingFang SC;
-          font-weight: 400;
-          font-size: 14px;
-          color: #fff;
-          cursor: default;
-        }
       }
     }
+  }
+
+  .default-btn-content{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .default-btn {
+    display: inline-block;
+    padding: 0 16px;
+    height: 28px;
+    line-height: 28px;
+    background: #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    cursor: default;
+  }
+
+  .opt-default-btn{
+    display: inline-block;
+    padding: 0 16px;
+    height: 28px;
+    line-height: 28px;
+    background: #2173F7;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    cursor: default;
   }
 
   .empty-content {
@@ -292,5 +310,11 @@ onBeforeMount(async () => {
 
 .title-1{
   font-size: 16px;
+}
+
+.opt-btn{
+  height: 32px;
+  line-height: 32px;
+  padding: 0 16px;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="vote-card-container">
     <div class="jus-bet-center">
       <div class="vote-left">
-        <div class="jus-bet-center">
+        <div class="jus-bet-center vote-left-title">
           <div class="ellipsis1 vote-title">{{ voteInfo.title }}</div>
           <div class="jus-end-center header-right-box">
             <div class="tag tag-sprint ellipsis1">{{ voteInfo.sprintName }}</div>
@@ -117,7 +117,7 @@ watch(() => props.voteInfo, (nval) => {
 <style lang="scss" scoped>
 .vote-card-container {
   width: 100%;
-  padding: 24px 0 16px;
+  padding: 24px 0 0;
 
   .tag {
     padding: 2px 10px;
@@ -144,9 +144,9 @@ watch(() => props.voteInfo, (nval) => {
     text-align: center;
     font-size: 12px;
     color: #ff5b02;
-    background: linear-gradient(270deg, rgba(255, 224, 206, 1), rgba(255, 191, 165, 0));
+    border-image: linear-gradient(270deg, rgba(255, 224, 206, 1), rgba(255, 191, 165, 0)) 1 1;
     box-sizing: border-box;
-    border: 1px solid #ff5b02;
+    border: 1px solid #fff4e7;
 
     &.bg-green{
       background: #ebf6ff;
@@ -207,6 +207,10 @@ watch(() => props.voteInfo, (nval) => {
       right: 0;
       bottom: -20px;
       border-bottom: 1px solid #e2e4e8;
+    }
+
+    .vote-left-title{
+      margin-top: -20px;
     }
 
     .vote-title {

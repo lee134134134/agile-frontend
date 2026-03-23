@@ -301,7 +301,7 @@ onBeforeMount(async () => {
         margin-bottom: 10px;
 
         .opt-btn {
-            padding: 5px 15px;
+            padding: 0 12px;
         }
     }
 

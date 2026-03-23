@@ -119,14 +119,14 @@ const tableColums = ref([
     label: '标题',
     prop: 'defectTitle',
     isSelect: true,
-    width: '300',
+    width: '350',
     showTooltip: true,
   },
   {
     label: '所属用户故事',
     prop: 'storyName',
     isSelect: true,
-    width: '180',
+    width: '220',
     showTooltip: true
   },
   {
@@ -168,7 +168,7 @@ const tableColums = ref([
     label: '创建时间',
     prop: 'createdAt',
     isSelect: true,
-    width: '200',
+    width: '160',
     showTooltip: true
   }
 ])
@@ -272,7 +272,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .tab-content {
-  padding: 20px;
   box-sizing: border-box;
   // background-color: #F0F5FC;
   height: calc(100vh - 231px);
@@ -309,7 +308,7 @@ onMounted(() => {
       justify-content: space-between;
 
       .title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
       }
     }

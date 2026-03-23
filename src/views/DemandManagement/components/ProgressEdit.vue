@@ -379,7 +379,7 @@ watch(() => props.isShow, (val) => {
     display: flex;
     align-items: center;
     border-radius: 4px;
-    padding: 0 20px 16px 20px;
+    padding: 0 20px 16px 0;
     margin-bottom: 24px;
 
     .card-icon {
@@ -401,17 +401,17 @@ watch(() => props.isShow, (val) => {
       overflow: hidden;
 
       .card-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
-        color: #303133;
-        margin-bottom: 8px;
+        color: #333;
+        margin-bottom: 6px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       .card-subtitle {
-        font-size: 13px;
+        font-size: 12px;
         color: #909399;
         line-height: 1.4;
       }
@@ -419,12 +419,11 @@ watch(() => props.isShow, (val) => {
   }
 
   .dia-main-content {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   /* 表单控件样式微调 */
   :deep(.el-form-item) {
-    margin-bottom: 24px; /* 增加间距以匹配截图的宽松布局 */
   }
 
   :deep(.el-form-item__label) {
@@ -456,7 +455,6 @@ watch(() => props.isShow, (val) => {
   .dia-footer {
     display: flex;
     justify-content: flex-end;
-    padding-top: 10px;
 
     .el-button {
       padding: 9px 20px;

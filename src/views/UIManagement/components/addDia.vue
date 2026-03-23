@@ -1,5 +1,6 @@
 <template>
-  <el-dialog v-model="addShow" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false" class="edit-dia"
+  <el-dialog v-model="addShow" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false"
+             class="edit-dia"
              width="780px" @close="handleClose">
     <template #header="{ close }">
       <div class="dia-header">
@@ -28,7 +29,8 @@
           <el-input v-model="detailFrom.version" clearable maxlength="20" placeholder="请输入版本"></el-input>
         </el-form-item>
         <el-form-item label="选择图片">
-          <el-upload ref="uploadRef" v-model:file-list="fileList" :accept="accept" :auto-upload="false" :class="{ disabled: fileList.length >= 1 }"
+          <el-upload ref="uploadRef" v-model:file-list="fileList" :accept="accept" :auto-upload="false"
+                     :class="{ disabled: fileList.length >= 1 }"
                      :on-exceed="handleExceed" action="#" class="img-upload" limit="1"
                      list-type="picture-card" @change="uploadChange">
             <template #default>
@@ -221,7 +223,7 @@ onBeforeMount(async () => {
     .title-text {
       font-family: PingFang SC;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
       color: #1D1D1D;
       line-height: 22px;
       text-align: left;

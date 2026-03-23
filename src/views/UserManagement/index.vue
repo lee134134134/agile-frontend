@@ -81,26 +81,26 @@
               <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
                          type="text"
                          @click="handleResetWord(scope.row)">
-                <el-tooltip content="重置密码" effect="light" placement="top">
+                <el-tooltip content="重置密码" effect="light" popper-class="fix-tooltip" placement="top">
                   <img :src="passwordIcon" alt="重置密码" class="table-icon"/>
                 </el-tooltip>
               </el-button>
               <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
                          type="text"
-                         @click="handleRole(scope.row)"><el-tooltip content="分配角色" effect="light" placement="top">
+                         @click="handleRole(scope.row)"><el-tooltip content="分配角色" effect="light" popper-class="fix-tooltip" placement="top">
                 <img :src="roleIcon" alt="分配角色" class="table-icon"/>
               </el-tooltip>
               </el-button>
               <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
                          type="text"
-                         @click="handleWork(scope.row)"><el-tooltip content="分配岗位" effect="light" placement="top">
+                         @click="handleWork(scope.row)"><el-tooltip content="分配岗位" effect="light" popper-class="fix-tooltip" placement="top">
                 <img :src="positionIcon" alt="分配岗位" class="table-icon"/>
               </el-tooltip>
               </el-button>
               <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-danger"
                          type="text"
                          @click="handleDelete(scope.row)">
-                <el-tooltip :content="scope.row.status == 1 ? '禁用' : '启用'" effect="light" placement="top">
+                <el-tooltip :content="scope.row.status == 1 ? '禁用' : '启用'" effect="light" popper-class="fix-tooltip" placement="top">
                   <img v-if="scope.row.status == 1" :src="disabelIcon" alt="禁用" class="table-icon"/>
                   <img v-else :src="archivedIcon" alt="启用" class="table-icon"/>
                 </el-tooltip>

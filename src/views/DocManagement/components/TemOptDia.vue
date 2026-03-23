@@ -27,7 +27,7 @@
                 <el-row :gutter="24">
                     <el-col :span="24">
                         <el-form-item label="授权角色" prop="roleIds">
-                            <el-select v-model="detailFrom.roleIds" placeholder="请选择" clearable multiple filterable
+                            <el-select v-model="detailFrom.roleIds" placeholder="请选择" clearable multiple collapse-tags collapse-tags-tooltip filterable
                                 @remove-tag="handleRemove" @clear="handleClear">
                                 <el-option v-for="item in rolesList" :key="item.id" :label="item.displayName"
                                     :value="item.id" />
@@ -162,7 +162,7 @@ onBeforeMount(async () => {
         .title-text {
             font-family: PingFang SC;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 16px;
             color: #1D1D1D;
             line-height: 22px;
             text-align: left;

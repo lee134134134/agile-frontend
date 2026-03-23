@@ -348,7 +348,7 @@ const detailRule = {
   .dia-header-title {
     display: flex; align-items: center;
     .title-icon { margin-right: 10px; width: 4px; height: 20px; background: #2173F7; border-radius: 2px; }
-    .title-text { font-family: PingFang SC; font-weight: 600; font-size: 18px; color: #1D1D1D; }
+    .title-text { font-family: PingFang SC; font-weight: 600; font-size: 16px; color: #1D1D1D; }
   }
   .dia-header-close { cursor: pointer; svg { width: 1.5em; height: 1.5em; } }
 }

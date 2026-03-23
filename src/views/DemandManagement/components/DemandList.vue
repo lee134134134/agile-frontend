@@ -4,7 +4,7 @@
       <div class="jus-bet-center">
         <section class="flex">
           <div class="title-1">需求管理</div>
-          <div class="sel-global-project">当前项目：{{ globalProjectName }} - {{globalProjectStatus}}</div>
+          <div class="sel-global-project">当前项目：{{ globalProjectName }} - {{ globalProjectStatus }}</div>
         </section>
         <div class="btn-list jus-start-center">
           <div v-role-code="['admin','PO','BRA']" class="opt-btn" @click="handleAddFn">
@@ -129,23 +129,27 @@
           <template #default="scope">
             <el-button v-role-code="['admin','PO','BRA']" class="btn-text-primary text-edit"
                        type="text" @click="handleEditFn(scope.row)">
-              <el-tooltip content="编辑" effect="light"  placement="top">
+              <el-tooltip content="编辑" effect="light" placement="top" popper-class="fix-tooltip">
                 <img v-if="scope.row.statusName==='已完成'" :src="editGrayIcon" alt="编辑" class="table-icon"/>
                 <img v-else :src="editIcon" alt="编辑" class="table-icon"/>
               </el-tooltip>
             </el-button>
             <el-button v-role-code="['admin','PO','BRA']" class="btn-text-primary text-delete"
                        type="text" @click="handleDelete(scope.row)">
-              <el-tooltip content="删除" effect="light"  placement="top">
+              <el-tooltip content="删除" effect="light" placement="top" popper-class="fix-tooltip">
                 <img v-if="scope.row.statusName==='已完成'" :src="deleteGrayIcon" alt="删除" class="table-icon"/>
                 <img v-else :src="deleteIcon" alt="删除" class="table-icon"/>
               </el-tooltip>
             </el-button>
             <el-button class="btn-text-primary text-btn" type="text"
-                       @click="handleUIFn(scope.row)">UI
+                       @click="handleUIFn(scope.row)">
+              <el-tooltip content="跳转至UI管理" effect="light" placement="top" popper-class="fix-tooltip">UI
+              </el-tooltip>
             </el-button>
             <el-button class="btn-text-primary text-btn" type="text"
-                       @click="handleDocFn(scope.row)">Doc
+                       @click="handleDocFn(scope.row)">
+              <el-tooltip content="跳转至项目文档" effect="light" placement="top" popper-class="fix-tooltip">Doc
+              </el-tooltip>
             </el-button>
           </template>
         </el-table-column>
@@ -168,7 +172,7 @@
  * @module DemandList
  * @version 1.0.0
  */
-import {h, markRaw, nextTick, onBeforeMount, onMounted, reactive, ref, watch} from 'vue';
+import {h, nextTick, onBeforeMount, onMounted, reactive, ref, watch} from 'vue';
 import {TableRowStyleFixed} from '@/utils';
 import pagination from '@/components/pagination.vue';
 import {ElMessageBox} from 'element-plus';
@@ -440,7 +444,7 @@ function getList() {
 }
 
 const handleDelete = (data) => {
-  if(data.statusName === '已完成') {
+  if (data.statusName === '已完成') {
     return false
   }
   demandCheck(data.id).then(res => {
@@ -463,18 +467,18 @@ const handleDelete = (data) => {
       })
     } else {
       ElMessageBox.confirm(
-          h('div', { class: 'msg-with-icon' }, [
-              h('div', {class: 'msg-with-icon-title'}, [
-                h('span', { class: 'icon' }, h(WarningFilled)),
-                h('span', { class: 'text' }, `提示`),
-              ]),
-              h('div',{class: 'msg-with-icon-text'}, '该项目下存在关联数据，不允许删除！')
+          h('div', {class: 'msg-with-icon'}, [
+            h('div', {class: 'msg-with-icon-title'}, [
+              h('span', {class: 'icon'}, h(WarningFilled)),
+              h('span', {class: 'text'}, `提示`),
+            ]),
+            h('div', {class: 'msg-with-icon-text'}, '该项目下存在关联数据，不允许删除！')
           ]),
           {
             showCancelButton: false,
             confirmButtonText: '确认',
             closeOnClickModal: false,
-            customClass:'msg-with-icon-box',
+            customClass: 'msg-with-icon-box',
           }
       ).then(() => {
         return
@@ -519,7 +523,7 @@ const handleEditRole = (data) => {
   })
 }
 const handleEditFn = (data) => {
-  if(data.statusName === '已完成') {
+  if (data.statusName === '已完成') {
     return false
   }
   operateDetailShow.value = true

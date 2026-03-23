@@ -9,6 +9,16 @@ export function TableRowStyle({ row, column, rowIndex, columnIndex }) {
   };
 }
 
+export function TableRowStyleDia({ row, column, rowIndex, columnIndex }) {
+  return {
+    background: "#eff4fe",
+    fontSize: "14px",
+    color: "#333",
+    height: "36px",
+    fontWeight: "bold",
+  };
+}
+
 export function TableRowStyleHide({ row, column, rowIndex, columnIndex }) {
   return {
     background: "#E6EEFF",

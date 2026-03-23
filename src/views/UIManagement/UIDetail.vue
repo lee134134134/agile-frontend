@@ -62,9 +62,7 @@
                      :class="imgInfoData && imgInfoData.id == imgInfo.id ? 'item-active' : ''" class="list-item"
                      @click="handleImageDetail(imgInfo)">
                   <div class="item-name">
-                                <span>{{
-                                    imgInfo.title.length > 5 ? imgInfo.title.substr(0, 8) + '...' : imgInfo.title
-                                  }}</span>
+                                <span class="item-name-title">{{imgInfo.title}}</span>
                     <span class="item-ver">{{ imgInfo.version }}</span>
                   </div>
                   <div class="item-text">
@@ -970,5 +968,13 @@ onMounted(async () => {
     font-size: 16px;
     font-weight: 400;
   }
+}
+
+.item-name-title{
+  width: 160px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

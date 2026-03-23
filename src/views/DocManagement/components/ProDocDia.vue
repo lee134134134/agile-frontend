@@ -248,6 +248,9 @@ onBeforeMount(async () => {
     detailFrom.documentType = props.detailInfo.documentTypeCode
     detailFrom.tags = props.detailInfo.tags
     detailFrom.versionDescription = props.detailInfo.versionDescription
+  }else{
+    detailFrom.projectCode = localStorage.getItem('global_ProjectCode')
+    await handleModel()
   }
 })
 
@@ -274,7 +277,7 @@ onBeforeMount(async () => {
     .title-text {
       font-family: PingFang SC;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
       color: #1D1D1D;
       line-height: 22px;
       text-align: left;

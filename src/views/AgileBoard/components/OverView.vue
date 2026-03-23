@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="view-right">
-      <div class="jus-bet-center">
+      <div class="jus-bet-center view-right-title">
         <div class="title-overview">燃尽迭代图</div>
         <div class="jus-end-center gap28">
           <div class="outExport" @mouseenter="showExportBox" @mouseleave="closeExportBox">
@@ -158,7 +158,7 @@ onBeforeMount(() => {
   padding: 20px;
   box-sizing: border-box;
   background-color: #F0F5FC;
-  height: calc(100vh - 231px);
+  height: calc(100vh - 348px);
   border-radius: 8px;
   gap: 10px;
   align-items: start;
@@ -176,7 +176,7 @@ onBeforeMount(() => {
   }
 
   .view-left, .view-right {
-    height: 516px;
+    height: 480px;
     background-color: #FFF;
     border-radius: 8px;
 
@@ -225,7 +225,7 @@ onBeforeMount(() => {
 
   .view-right {
     width: calc(100% - 460px);
-    padding: 24px 24px 28px;
+    padding: 0 16px;
     box-sizing: border-box;
 
     .cond-label {
@@ -261,7 +261,7 @@ onBeforeMount(() => {
 
     .chart-content {
       width: 100%;
-      height: calc(100% - 32px);
+      height: calc(100% - 60px);
     }
 
   }
@@ -274,5 +274,9 @@ onBeforeMount(() => {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+.view-right-title{
+  margin-top: 20px;
 }
 </style>

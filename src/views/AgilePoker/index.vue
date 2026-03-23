@@ -6,15 +6,17 @@
           <div class="title-1">敏捷扑克</div>
           <div class="sel-global-project">当前项目：{{ globalProjectName }} - {{ globalProjectStatus }}</div>
         </div>
-        <div class="opt-btn btn-margin-right" @click="handleHistory">
+        <div class="opt-btn" @click="handleHistory">
           <el-icon class="mr-3">
             <ChatDotSquare/>
           </el-icon>
           估算历史
         </div>
       </div>
+    </div>
 
-      <div class="search-content jus-bet-center bg-color-1 border-radius-8">
+    <section class="import-table-wrapper">
+      <div class="search-content jus-bet-center">
         <el-form ref="searchFromRef" :model="searchFrom">
           <div class="flex">
             <el-form-item label="迭代" prop="sprintCode">
@@ -51,69 +53,69 @@
             </div>
           </div>
           <el-row :gutter="24">
-            </el-row>
+          </el-row>
         </el-form>
       </div>
-    </div>
-    <div class="page-table">
-      <div class="title-2">估算列表</div>
-      <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit
-                max-height="calc(100vh - 394px)" scrollbar-always-on
-                stripe style="width: 100%">
-        <el-table-column align="left" label="序号" type="index" width="80"></el-table-column>
-        <el-table-column align="left" label="项目" min-width="150" prop="projectName"></el-table-column>
-        <el-table-column align="left" label="需求(产品代办列表)" min-width="200" prop="requirementTitle"
-                         show-overflow-tooltip></el-table-column>
-        <el-table-column align="left" label="用户故事标题" min-width="180" prop="userStoryTitle"
-                         show-overflow-tooltip></el-table-column>
-        <el-table-column align="left" label="用户故事描述" prop="userStoryDes" show-overflow-tooltip
-                         width="260"></el-table-column>
-        <el-table-column align="left" label="故事点" min-width="120" prop="storyPoint"></el-table-column>
-        <el-table-column align="left" label="进度" show-overflow-tooltip width="160">
-          <template #default="scope">
-            <div>
-              <div :class="scope.row.status == '未开始' ? 'status-black' : 'status-green'" class="status-tag">
-                {{ scope.row.status }}
+      <div class="page-table">
+        <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit
+                  max-height="calc(100vh - 394px)" scrollbar-always-on
+                  stripe style="width: 100%">
+          <el-table-column align="left" label="序号" type="index" width="80"></el-table-column>
+          <el-table-column align="left" label="项目" min-width="150" prop="projectName"></el-table-column>
+          <el-table-column align="left" label="需求(产品代办列表)" min-width="200" prop="requirementTitle"
+                           show-overflow-tooltip></el-table-column>
+          <el-table-column align="left" label="用户故事标题" min-width="180" prop="userStoryTitle"
+                           show-overflow-tooltip></el-table-column>
+          <el-table-column align="left" label="用户故事描述" prop="userStoryDes" show-overflow-tooltip
+                           width="260"></el-table-column>
+          <el-table-column align="left" label="故事点" min-width="120" prop="storyPoint"></el-table-column>
+          <el-table-column align="left" label="进度" show-overflow-tooltip width="160">
+            <template #default="scope">
+              <div>
+                <div :class="scope.row.status == '未开始' ? 'status-black' : 'status-green'" class="status-tag">
+                  {{ scope.row.status }}
+                </div>
+                <span v-show="scope.row.status == '进行中'" class="status-tag-text">{{
+                    scope.row.progress ? scope.row.progress : '-'
+                  }}人完成</span>
               </div>
-              <span v-show="scope.row.status == '进行中'" class="status-tag-text">{{
-                  scope.row.progress ? scope.row.progress : '-'
-                }}人完成</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column align="left" label="已出牌人员" prop="description" width="310">
-          <template #default="{ row }">
-            <el-tooltip
-              v-if="row.usersArr && row.usersArr.length > 0"
-              class="box-item"
-              effect="dark"
-              :content="row.usersArr.join('、')"
-              placement="top"
-            >
-              <div class="user-tags-box">
-                <el-tag v-for="item in row.usersArr" :key="item" type="primary" size="small">{{ item }}</el-tag>
-              </div>
-            </el-tooltip>
-            <div v-else class="no-data-text">暂无</div>
-          </template>
-        </el-table-column>
-        <el-table-column align="left" fixed="right" label="操作" width="160">
-          <template #default="scope">
-            <el-button class="btn-text-primary" type="text"
-                       @click="handleEstimateRoom(scope.row)">开始估算
-            </el-button>
-            <el-button v-show="btnAuthFileter('joker_result')" class="btn-text-primary" type="text"
-                       @click="handleJokerResultRoom(scope.row)">亮牌
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <div class="paginationg-box">
-        <pagination :currentPage="searchFrom.current" :pageSize="searchFrom.size" :total="total"
-                    @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
-        </pagination>
+            </template>
+          </el-table-column>
+          <el-table-column align="left" label="已出牌人员" prop="description" width="310">
+            <template #default="{ row }">
+              <el-tooltip
+                  v-if="row.usersArr && row.usersArr.length > 0"
+                  :content="row.usersArr.join('、')"
+                  class="box-item"
+                  effect="dark"
+                  placement="top"
+              >
+                <div class="user-tags-box">
+                  <el-tag v-for="item in row.usersArr" :key="item" size="small" type="primary">{{ item }}</el-tag>
+                </div>
+              </el-tooltip>
+              <div v-else class="no-data-text">暂无</div>
+            </template>
+          </el-table-column>
+          <el-table-column align="left" fixed="right" label="操作" width="160">
+            <template #default="scope">
+              <el-button class="btn-text-primary" type="text"
+                         @click="handleEstimateRoom(scope.row)">开始估算
+              </el-button>
+              <el-button v-show="btnAuthFileter('joker_result')" class="btn-text-primary" type="text"
+                         @click="handleJokerResultRoom(scope.row)">亮牌
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="paginationg-box">
+          <pagination :currentPage="searchFrom.current" :pageSize="searchFrom.size" :total="total"
+                      @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
+          </pagination>
+        </div>
       </div>
-    </div>
+    </section>
+
     <estimateRomeCom v-if="isDiaShow" :info="diaParams" :isShow="isDiaShow" :type="diaType"
                      @closeDiaFn="closeEstimateDiaFn"></estimateRomeCom>
   </div>
@@ -285,44 +287,43 @@ onBeforeUnmount(() => {
   height: 100%;
   background-color: #f6f8fc;
 
+  .search-content {
+    margin-bottom: 12px;
+    background-color: #FFF;
+
+    .search-btn {
+      display: flex;
+      padding-right: 20px;
+      align-items: center;
+    }
+  }
+
+  :deep(.el-form-item) {
+    margin-bottom: 0;
+  }
+
+  :deep(.el-input) {
+    --el-input-height: 28px;
+    --el-input-border-color: #DBDDE3;
+    --el-input-border-radius: 4px;
+    --el-input-padding-left: 10px;
+    --el-input-padding-right: 10px;
+    width: 260px;
+  }
+
+  :deep(.el-select__wrapper) {
+    min-height: 28px;
+    height: 28px;
+    border-radius: 4px;
+  }
+
   .page-search {
-    margin-bottom: 20px;
-
-    .search-content {
-      margin-top: 12px;
-      padding: 12px 16px;
-      background-color: #FFF;
-
-      .search-btn {
-        display: flex;
-        padding-right: 20px;
-        align-items: center;
-      }
-
-    }
-
-    :deep(.el-form-item) {
-      margin-bottom: 0;
-    }
-
-    :deep(.el-input) {
-      --el-input-height: 28px;
-      --el-input-border-color: #DBDDE3;
-      --el-input-border-radius: 4px;
-      --el-input-padding-left: 10px;
-      --el-input-padding-right: 10px;
-      width: 260px;
-    }
-
-    :deep(.el-select__wrapper) {
-      min-height: 28px;
-      height: 28px;
-      border-radius: 4px;
-    }
+    margin-bottom: 16px;
   }
 
   .page-table {
     .title-2 {
+      font-size: 14px;
       margin-bottom: 12px;
     }
 
@@ -350,6 +351,10 @@ onBeforeUnmount(() => {
       flex-shrink: 0;
       margin-bottom: 2px;
       margin-right: 4px;
+
+      .el-tag__content {
+        font-size: 12px;
+      }
     }
 
     .no-data-text {
@@ -394,7 +399,7 @@ onBeforeUnmount(() => {
 }
 
 .mr-3 {
-  vertical-align: -1px;
+  vertical-align: -2px;
 }
 
 .btn-primary {
@@ -435,5 +440,17 @@ onBeforeUnmount(() => {
     height: 22px;
     line-height: 22px;
   }
+}
+
+.opt-btn {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
+}
+
+.import-table-wrapper {
+  padding: 12px 16px 0;
+  background: #fff;
+  border-radius: 8px;
 }
 </style>

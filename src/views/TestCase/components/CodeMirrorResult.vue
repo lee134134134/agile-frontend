@@ -107,7 +107,7 @@
     width: 100%;
     height: calc(100% - 6px);
     .code-mirror {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 30px;
       background-color: #FFF;
     }

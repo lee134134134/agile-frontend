@@ -301,6 +301,8 @@ onBeforeMount(() => {
 </script>
 <style lang="scss" scoped>
 .main-content {
+  height: 100%;
+
   .page-search {
     margin-bottom: 12px;
 
@@ -429,10 +431,11 @@ onBeforeMount(() => {
     }
   }
 }
+
 // ------------------------ Tab 样式修改结束 ------------------------
 
 
-.btn-plus{
+.btn-plus {
   margin-right: 1px;
   vertical-align: -2px;
 }

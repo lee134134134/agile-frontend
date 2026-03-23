@@ -94,10 +94,10 @@
           </div>
         </div>
         <div v-if="currentId != undefined && tableData.length > 0" class="table-content">
-          <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyleFixed" fit
+          <el-table class="dia-table-content" v-loading="loading" :data="tableData" :header-cell-style="TableRowStyleFixed" fit
                     height="calc(100vh - 210px)" scrollbar-always-on
                     stripe style="width: 100%">
-            <el-table-column align="left" label="故事标题" show-overflow-tooltip width="150">
+            <el-table-column align="left" label="故事标题" show-overflow-tooltip width="200">
               <template #default="scope">
                                 <span class="link-text" @click="handleOptFn(3, scope.row)">{{
                                     scope.row.title ?? '-'
@@ -125,13 +125,13 @@
               <template #default="scope">
                 <el-button class="btn-text-primary text-btn" type="text"
                            @click="handleOptFn(2, scope.row)">
-                  <el-tooltip content="编辑" effect="light"  placement="top">
+                  <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
                     <img :src="editIcon" alt="编辑" class="table-icon"/>
                   </el-tooltip>
                 </el-button>
                 <el-button class="btn-text-danger text-btn" type="text"
                            @click="handleDelete(scope.row)">
-                  <el-tooltip content="删除" effect="light"  placement="top">
+                  <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
                     <img :src="deleteIcon" alt="删除" class="table-icon"/>
                   </el-tooltip>
                 </el-button>
@@ -539,5 +539,13 @@ onBeforeMount(async () => {
 .title-2 {
   font-size: 14px;
   color: #333;
+}
+
+:deep(.dia-table-content .el-table__cell){
+  padding: 6px 0;
+}
+
+:deep(.dia-table-content .el-table__cell .cell){
+  line-height: 20px;
 }
 </style>

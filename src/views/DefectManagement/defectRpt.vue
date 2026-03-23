@@ -215,7 +215,7 @@ onMounted(() => {
       .card-val {
         height: 30px;
         line-height: 30px;
-        font-size: 18px;
+        font-size: 16px;
         color: #006ED3;
         font-weight: bold;
       }

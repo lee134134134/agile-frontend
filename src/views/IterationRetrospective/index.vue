@@ -21,12 +21,26 @@
             </el-form-item> -->
             <el-form-item label="迭代名称" prop="sprintName">
               <el-select v-model="searchFrom.sprintName" clearable placeholder="请选择" style="width: 260px;"
-                         @change="handleSerach">
-                <el-option-group v-for="group in curUserProjectIterationList" :key="group.state"
-                                 :label="group.state">
-                  <el-option v-for="item in group.list" :key="item.code" :label="item.name"
-                             :value="item.name"/>
-                </el-option-group>
+                         @change="handleSerach" popper-class="custom-iteration-popper">
+                <template v-for="group in curUserProjectIterationList" :key="group.state">
+                  <el-option disabled class="group-title-option" :value="`group-${group.state}`">
+                    <div class="group-header-content" :class="getGroupClass(group.state)">
+                      <el-icon class="status-icon">
+                        <img v-if="group.state === '进行中'" class="status-icon-img" src="@/assets/webp/select_todo.webp" alt="">
+                        <img v-else-if="group.state === '未开始'" class="status-icon-img" src="@/assets/webp/select_nostart.webp" alt="">
+                        <img v-else class="status-icon-img" src="@/assets/webp/select_com.webp" alt="">
+                      </el-icon>
+                      <span>{{ group.state }}</span>
+                    </div>
+                  </el-option>
+                  <el-option
+                      v-for="item in group.list"
+                      :key="item.code"
+                      :label="item.name"
+                      :value="item.name"
+                      class="iteration-item-option"
+                  />
+                </template>
               </el-select>
             </el-form-item>
           </el-col>
@@ -173,7 +187,12 @@ const getLinePage = (data) => {
     }
   })
 }
-
+// 状态对应的样式类
+const getGroupClass = (state) => {
+  if (state === '进行中') return 'is-ongoing';
+  if (state === '已完成') return 'is-completed';
+  return 'is-default';
+}
 const getFeedbackPage = (data) => {
   router.push({
     path: '/iterationRetrospective/feedbackPage', query: {
@@ -286,8 +305,7 @@ onBeforeMount(() => {
   }
 
   .search-content {
-    padding: 0 20px;
-    height: 72px;
+    padding: 0 20px 8px;
 
     .search-btn {
       margin-left: 20px;
@@ -328,7 +346,7 @@ onBeforeMount(() => {
     }
 
     .group-contaner {
-      padding: 10px 20px;
+      padding: 10px 0;
       // margin-right: -15px;
       height: calc(100vh - 150px);
       overflow-y: auto;
@@ -378,14 +396,14 @@ onBeforeMount(() => {
           }
 
           .item-btn {
-            margin-top: 16px;
+            margin-top: 10px;
             gap: 12px;
 
             .btn {
               border-radius: 4px;
               flex: 1;
-              height: 28px;
-              line-height: 28px;
+              height: 30px;
+              line-height: 30px;
               font-size: 12px;
               cursor: pointer;
 
@@ -464,5 +482,75 @@ onBeforeMount(() => {
 .img-icon {
   width: 14px;
   height: 14px;
+}
+
+/* 关键：伪装标题的容器样式 */
+.group-header-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+  margin: 0 -20px; /* 填满整行 */
+  font-weight: bold;
+  font-size: 13px;
+
+  .status-icon {
+    margin-right: 6px;
+    font-size: 14px;
+  }
+
+  &.is-ongoing {
+    background-color: #f5faff;
+    width: 130%;
+    color: #409eff;
+    font-size: 12px;
+    line-height: 28px;
+    height: 28px;
+  }
+
+  &.is-completed {
+    background-color: #eefaf9;
+    width: 130%;
+    color: #67c23a;
+    font-size: 12px;
+    line-height: 28px;
+    height: 28px;
+  }
+
+  &.is-default {
+    background-color: #f6f8fa;
+    width: 130%;
+    color: #333333;
+    font-size: 12px;
+    line-height: 28px;
+    height: 28px;
+  }
+}
+
+.status-icon-img{
+  width: 14px;
+  height: 14px;
+}
+
+
+/* 强制清除 el-option 作为标题时的默认样式 */
+:deep(.custom-iteration-popper) {
+  .el-select-dropdown__item.is-disabled.group-title-option {
+    cursor: default;
+    opacity: 1; /* 防止置灰透明度 */
+    height: 34px;
+    line-height: 34px;
+    padding: 0 20px;
+    color: inherit;
+
+    &:hover {
+      background-color: transparent; /* 禁止标题行 hover 变色 */
+    }
+  }
+
+  /* 正常的选项稍微缩进，模拟分组感 */
+  .iteration-item-option {
+    padding-left: 30px;
+  }
 }
 </style>

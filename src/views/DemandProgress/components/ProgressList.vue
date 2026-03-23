@@ -154,12 +154,12 @@
           <template #default="scope">
             <el-button v-if="canEdit(scope.row)" class="btn-text-primary text-btn" type="text"
                        @click="handleEditFn(scope.row)">
-              <el-tooltip content="编辑" effect="light" placement="top">
+              <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
                 <img :src="editIcon" alt="编辑" class="table-icon"/>
               </el-tooltip>
             </el-button>
             <span v-else class="text-gray">
-              <el-tooltip content="编辑" effect="light" placement="top">
+              <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
                 <img :src="editGrayIcon" alt="编辑" class="table-icon"/>
               </el-tooltip>
             </span>

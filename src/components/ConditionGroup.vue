@@ -311,7 +311,7 @@ const removeChildGroup = (id: string) => {
 }
 
 .action-btn {
-  font-size: 18px;
+  font-size: 16px;
   width: 32px;
   height: 32px;
   display: flex;

@@ -1,6 +1,5 @@
 <template>
   <div class="ha">
-    这是首页
     <div class="nav">
       <span v-for="(item, i) in $router.options.routes" :key="i" v-show="item.homeShow">
         <router-link :to="{ name: item.name }">{{ i + 1 }}：{{ item.meta.title }}</router-link>

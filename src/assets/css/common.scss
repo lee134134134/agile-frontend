@@ -920,7 +920,7 @@ ul {
     padding-top: 20px;
 
     .el-message-box__title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       color: #303133;
     }
@@ -1274,8 +1274,8 @@ ul {
 }
 
 .el-upload--picture-card {
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
 }
 
 .el-select__wrapper {
@@ -1336,6 +1336,16 @@ ul {
 .el-popper.is-dark.el-tooltip {
   max-width: 400px !important;
   word-break: break-all;
+  background: #444;
+
+  .el-popper__arrow::before {
+    background: #444 !important;
+    border-color: #444 !important;
+  }
+
+  span{
+     font-size: 12px;
+  }
 }
 
 .tips-w {
@@ -1514,4 +1524,13 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
   transition: background-color 5000s ease-in-out 0s;
   margin: 1px 0;
   height: 45px;
+}
+
+.el-select__wrapper.is-disabled .el-select__selected-item{
+  color: #333;
+  background: #f1f5fe;
+}
+
+.fix-tooltip > span{
+  font-size: 12px;
 }

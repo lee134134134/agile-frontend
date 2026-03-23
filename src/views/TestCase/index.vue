@@ -60,12 +60,12 @@
                              :label="item.name" :value="item.value"/>
                 </el-select>
               </el-form-item>
-              <el-form-item label="" prop="tags" style="margin-right: 0;width: 200px;margin-top: -4px;">
+              <el-form-item label="" prop="tags" style="margin-right: 0;width: 200px;">
                 <el-input v-model="searchForm.tags" clearable maxlength="20" placeholder="请输入标签"
                           style="width: 260px;"></el-input>
               </el-form-item>
             </template>
-            <div style="display: flex; gap: 12px; margin-left: 16px;margin-top:-3px;">
+            <div style="display: flex; gap: 12px; margin-left: 16px;">
               <div class="btn-primary" @click="handleSerach">
                 <el-icon class="mr-3">
                   <Search/>
@@ -181,14 +181,14 @@
             <el-button :class="{ 'disabled-btn': !canEditCase }" :disabled="!canEditCase"
                        class="btn-text-primary text-btn"
                        type="text" @click="handleEditFn(scope.row, 'edit')">
-              <el-tooltip content="编辑" effect="light"  placement="top">
+              <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
                 <img :src="editIcon" alt="编辑" class="table-icon"/>
               </el-tooltip>
             </el-button>
             <el-button :class="{ 'disabled-btn': !canDeleteCase }" :disabled="!canDeleteCase"
                        class="btn-text-danger text-btn"
                        type="text" @click="handleDelete(scope.row)">
-              <el-tooltip content="删除" effect="light"  placement="top">
+              <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
                 <img :src="deleteIcon" alt="删除" class="table-icon"/>
               </el-tooltip>
             </el-button>
@@ -1401,7 +1401,7 @@ onMounted(() => {
       justify-content: space-between;
 
       .title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
       }
     }

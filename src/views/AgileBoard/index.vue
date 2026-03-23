@@ -3,41 +3,43 @@
     <div class="page-search">
       <div class="title-1">
         <div class="jus-start-center">
-          <div class="title">敏捷看板</div>
+          <div class="title-1">敏捷看板</div>
           <div class="sel-global-project">当前项目：{{ globalProjectName }} - {{ globalProjectStatus }}</div>
         </div>
-        <div class="jus-bet-center">
-          <div class="cond-label">所属迭代</div>
-          
-          <el-select 
-            v-model="sprintId" 
-            style="width: 260px" 
-            placeholder="请选择迭代"
-            @change="handleChangeSprintId"
-            popper-class="custom-iteration-popper"
-          >
-            <template v-for="group in dicStore.userIterationList" :key="group.state">
-              
-              <el-option disabled class="group-title-option" :value="`group-${group.state}`">
-                <div class="group-header-content" :class="getGroupClass(group.state)">
-                  <el-icon class="status-icon">
-                    <img v-if="group.state === '进行中'" class="status-icon-img" src="@/assets/webp/select_todo.webp" alt="">
-                    <img v-else-if="group.state === '未开始'" class="status-icon-img" src="@/assets/webp/select_nostart.webp" alt="">
-                    <img v-else class="status-icon-img" src="@/assets/webp/select_com.webp" alt="">
-                  </el-icon>
-                  <span>{{ group.state }}</span>
-                </div>
-              </el-option>
+        <div class="jus-bet-center page-search-select">
+          <section></section>
+          <section class="flex">
+            <div class="cond-label">所属迭代</div>
+            <el-select
+                v-model="sprintId"
+                style="width: 260px"
+                placeholder="请选择迭代"
+                @change="handleChangeSprintId"
+                popper-class="custom-iteration-popper"
+            >
+              <template v-for="group in dicStore.userIterationList" :key="group.state">
 
-              <el-option 
-                v-for="item in group.list" 
-                :key="item.code" 
-                :label="item.name"
-                :value="item.code"
-                class="iteration-item-option"
-              />
-            </template>
-          </el-select>
+                <el-option disabled class="group-title-option" :value="`group-${group.state}`">
+                  <div class="group-header-content" :class="getGroupClass(group.state)">
+                    <el-icon class="status-icon">
+                      <img v-if="group.state === '进行中'" class="status-icon-img" src="@/assets/webp/select_todo.webp" alt="">
+                      <img v-else-if="group.state === '未开始'" class="status-icon-img" src="@/assets/webp/select_nostart.webp" alt="">
+                      <img v-else class="status-icon-img" src="@/assets/webp/select_com.webp" alt="">
+                    </el-icon>
+                    <span>{{ group.state }}</span>
+                  </div>
+                </el-option>
+
+                <el-option
+                    v-for="item in group.list"
+                    :key="item.code"
+                    :label="item.name"
+                    :value="item.code"
+                    class="iteration-item-option"
+                />
+              </template>
+            </el-select>
+          </section>
         </div>
       </div>
     </div>
@@ -335,8 +337,20 @@ onBeforeMount(() => {
   }
 }
 
+.page-search-select{
+  margin-top: -20px;
+}
+
+.flex{
+  gap: 12px;
+}
+
 .status-icon-img{
   width: 14px;
   height: 14px;
+}
+
+.cond-label{
+  color: #333;
 }
 </style>

@@ -291,17 +291,19 @@ watch(() => props.curSprintId, () => {
   }
 
   .filter-item {
-    padding: 2px 10px;
+    padding: 1px 8px;
     font-size: 12px;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 4px;
     color: #303133;
+    background: #edf1f6;
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     border: 1px solid transparent;
     user-select: none;
 
     &:hover {
       color: #2173f7;
+      background: #e5eefe;
     }
 
     &.is-active {

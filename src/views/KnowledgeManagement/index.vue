@@ -121,24 +121,46 @@
           </div>
 
           <div class="table-box">
-            <el-table v-loading="knowsListLoading" :data="knowledgeList" header-row-class-name="custom-header"
-                      style="width: 100%">
-              <el-table-column label="文档类型" prop="docType" width="180">
-                <template #default="scope">
-                  {{ formatValue(scope.row.docType) || '-' }}
-                </template>
-              </el-table-column>
-              <el-table-column label="标题" min-width="300" prop="docTitle">
-                <template #default="scope">
-                                    <span class="link-text" @click="handleOpen(scope.row)">{{
-                                        scope.row.docTitle
-                                      }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="发布人" prop="updatedBy" width="180"/>
-              <el-table-column label="首次发布时间" prop="createdAt" width="220"/>
-              <el-table-column label="最新更新时间" prop="updatedAt" width="220"/>
-            </el-table>
+<!--            <el-table v-loading="knowsListLoading" :data="knowledgeList" header-row-class-name="custom-header"-->
+<!--                      style="width: 100%">-->
+<!--              <el-table-column label="文档类型" prop="docType" width="180">-->
+<!--                <template #default="scope">-->
+<!--                  {{ formatValue(scope.row.docType) || '-' }}-->
+<!--                </template>-->
+<!--              </el-table-column>-->
+<!--              <el-table-column label="标题" min-width="300" prop="docTitle">-->
+<!--                <template #default="scope">-->
+<!--                                    <span class="link-text" @click="handleOpen(scope.row)">{{-->
+<!--                                        scope.row.docTitle-->
+<!--                                      }}</span>-->
+<!--                </template>-->
+<!--              </el-table-column>-->
+<!--              <el-table-column label="发布人" prop="updatedBy" width="180"/>-->
+<!--              <el-table-column label="首次发布时间" prop="createdAt" width="220"/>-->
+<!--              <el-table-column label="最新更新时间" prop="updatedAt" width="220"/>-->
+<!--            </el-table>-->
+
+            <section v-loading="knowsListLoading" class="table-card-list">
+              <div v-for="(item,index) in knowledgeList" :key="index" class="table-card-item">
+                <div class="left-tip">{{ formatValue(item.docType) || '-' }}</div>
+                <div class="right-tip"><i/>{{ item.updatedBy || '-' }}</div>
+                <div class="table-card-section">
+                  <div class="title" @click.stop="handleOpen(item)">
+                    <AutoTooltip :content="item.docTitle"></AutoTooltip>
+                  </div>
+                  <div class="bottom flex">
+                    <div class="left-time">
+                      <p class="time">首次发布时间</p>
+                      <p class="time-text">{{ item.createdAt }}</p>
+                    </div>
+                    <div class="right-time">
+                      <p class="time">最新更新时间</p>
+                      <p class="time-text">{{ item.updatedAt }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
             <div class="pagination-box">
               <pagination :currentPage="searchKnowledge.current" :pageSize="searchKnowledge.size" :total="knowsTotal"
@@ -551,6 +573,9 @@ onBeforeMount(async () => {
 .table-card-list {
   height: calc(100vh - 310px);
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
   gap: 16px;
   overflow-y: auto;
 

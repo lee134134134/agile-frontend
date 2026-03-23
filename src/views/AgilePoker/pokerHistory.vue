@@ -1,66 +1,67 @@
 <template>
   <div class="main-content">
     <MenuBreadCom :type="3"></MenuBreadCom>
-    <div class="page-search">
-      <div class="search-content jus-bet-center bg-color-1 border-radius-8">
-        <el-form ref="searchFromRef" :model="searchFrom">
-          <div class="flex">
-            <el-form-item label="需求" prop="requirementCode">
-              <el-select v-model="searchFrom.requirementCode" clearable filterable
-                         placeholder="全部" style="width: 260px;" @change="getStoryListFn">
-                <el-option v-for="item in demandList" :key="item.code" :label="item.name"
-                           :value="item.code"/>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="用户故事" prop="storyCode">
-              <el-select v-model="searchFrom.storyCode" clearable placeholder="全部" style="width: 260px;">
-                <el-option v-for="item in storyList" :key="item.code" :label="item.name"
-                           :value="item.code"/>
-              </el-select>
-            </el-form-item>
-            <div class="search-btn">
-              <div class="btn-primary btn-margin-right" @click="handleSerach">
-                <el-icon class="mr-3">
-                  <Search/>
-                </el-icon>
-                筛选
-              </div>
-              <div class="btn-circle-fix" @click="handleReset">
-                <el-icon class="mr-3">
-                  <RefreshLeft/>
-                </el-icon>
-                重置
+    <section class="table-wrapper">
+      <div class="page-search">
+        <div class="search-content jus-bet-center bg-color-1 border-radius-8">
+          <el-form ref="searchFromRef" :model="searchFrom">
+            <div class="flex">
+              <el-form-item label="需求" prop="requirementCode">
+                <el-select v-model="searchFrom.requirementCode" clearable filterable
+                           placeholder="全部" style="width: 260px;" @change="getStoryListFn">
+                  <el-option v-for="item in demandList" :key="item.code" :label="item.name"
+                             :value="item.code"/>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="用户故事" prop="storyCode">
+                <el-select v-model="searchFrom.storyCode" clearable placeholder="全部" style="width: 260px;">
+                  <el-option v-for="item in storyList" :key="item.code" :label="item.name"
+                             :value="item.code"/>
+                </el-select>
+              </el-form-item>
+              <div class="search-btn">
+                <div class="btn-primary btn-margin-right" @click="handleSerach">
+                  <el-icon class="mr-3">
+                    <Search/>
+                  </el-icon>
+                  筛选
+                </div>
+                <div class="btn-circle-fix" @click="handleReset">
+                  <el-icon class="mr-3">
+                    <RefreshLeft/>
+                  </el-icon>
+                  重置
+                </div>
               </div>
             </div>
-          </div>
-        </el-form>
+          </el-form>
+        </div>
       </div>
-    </div>
-    <div class="page-table">
-      <div class="title-2">历史列表</div>
-      <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit
-                max-height="calc(100vh - 420px)" scrollbar-always-on
-                stripe style="width: 100%">
-        <el-table-column align="center" label="序号" type="index" width="80"></el-table-column>
-        <el-table-column align="left" label="用户故事" min-width="120" prop="userStoryTitle"
-                         show-overflow-tooltip></el-table-column>
-        <el-table-column align="left" label="轮次" prop="times" show-overflow-tooltip width="100"></el-table-column>
-        <el-table-column align="left" label="估算值" min-width="200" prop="description" show-overflow-tooltip>
-          <template #default="{ row, column, $index }">
-            <div v-if="row.peps && row.peps.length > 0" class="jus-start-center" style="column-gap: 10px;">
-              <el-tag v-for="item in row.peps" :key="item" type="primary">{{ item }}</el-tag>
-            </div>
-            <div v-else>-</div>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" label="估算时间" prop="endTime" width="180"></el-table-column>
-      </el-table>
-      <div class="paginationg-box">
-        <pagination :currentPage="searchFrom.current" :pageSize="searchFrom.size" :total="total"
-                    @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
-        </pagination>
+      <div class="page-table">
+        <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit
+                  max-height="calc(100vh - 420px)" scrollbar-always-on
+                  stripe style="width: 100%">
+          <el-table-column align="center" label="序号" type="index" width="80"></el-table-column>
+          <el-table-column align="left" label="用户故事" min-width="120" prop="userStoryTitle"
+                           show-overflow-tooltip></el-table-column>
+          <el-table-column align="left" label="轮次" prop="times" show-overflow-tooltip width="100"></el-table-column>
+          <el-table-column align="left" label="估算值" min-width="200" prop="description" show-overflow-tooltip>
+            <template #default="{ row, column, $index }">
+              <div v-if="row.peps && row.peps.length > 0" class="jus-start-center" style="column-gap: 10px;">
+                <el-tag v-for="item in row.peps" :key="item" type="primary">{{ item }}</el-tag>
+              </div>
+              <div v-else>-</div>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="估算时间" prop="endTime" width="180"></el-table-column>
+        </el-table>
+        <div class="paginationg-box">
+          <pagination :currentPage="searchFrom.current" :pageSize="searchFrom.size" :total="total"
+                      @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
+          </pagination>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 <script setup>
@@ -182,13 +183,12 @@ onMounted(() => {
 <style lang="scss" scoped>
 .main-content {
   background-color: #f6f8fc;
+  height: 100%;
 
   .page-search {
-    margin-bottom: 20px;
 
     .search-content {
-      margin-top: 12px;
-      padding: 12px 16px;
+      margin-bottom: 12px;
       background-color: #FFF;
 
       .search-btn {
@@ -312,5 +312,16 @@ onMounted(() => {
   line-height: 28px;
   border-radius: 3px;
   border: 1px solid #e2e4e8;
+}
+
+.table-wrapper{
+  margin-top: 12px;
+  padding: 12px 16px 0;
+  background: #fff;
+  border-radius: 8px;
+}
+
+:deep(.el-tag.el-tag--primary span){
+  font-size: 12px;
 }
 </style>

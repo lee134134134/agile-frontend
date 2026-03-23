@@ -13,14 +13,17 @@
     </div>
 
     <div class="page-table">
-      <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit max-height="calc(100vh - 470px)"
+      <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit
+                max-height="calc(100vh - 470px)"
                 scrollbar-always-on show-overflow-tooltip
                 stripe style="width: 100%;min-height: 200px;">
         <el-table-column v-for="(item, index) in tableColums.filter(item => item.isSelect == true)"
-                         :key="item.prop + index" :fixed="item.prop == 'defectTitle' ? 'left' : false" :label="item.label" :min-width="item.width"
-                         :align="item.prop == 'meetingStatus' ? 'center' : 'left'">
+                         :key="item.prop + index" :align="item.prop == 'meetingStatus' ? 'center' : 'left'"
+                         :fixed="item.prop == 'defectTitle' ? 'left' : false" :label="item.label"
+                         :min-width="item.width">
           <template #default="{ row, column, $index }">
-            <div v-if="item.prop == 'meetingStatus'" :class="{ 'status-black': row[`${item.prop}`] === '未开始', 'status-blue': row[`${item.prop}`] === '进行中', 'status-green': row[`${item.prop}`] === '已结束' }"
+            <div v-if="item.prop == 'meetingStatus'"
+                 :class="{ 'status-black': row[`${item.prop}`] === '未开始', 'status-blue': row[`${item.prop}`] === '进行中', 'status-green': row[`${item.prop}`] === '已结束' }"
                  class="project-tag1">
               {{ row[`${item.prop}`] }}
             </div>
@@ -31,16 +34,28 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="center" fixed="right" label="操作" width="200">
+        <el-table-column align="left" fixed="right" label="操作" width="120">
           <template #default="scope">
             <el-button class="btn-text-primary text-btn" type="text"
-                       @click="handleEditFn(scope.row, 'view')">查看
+                       @click="handleEditFn(scope.row, 'view')">
+              <el-tooltip content="查看" effect="light" popper-class="fix-tooltip" placement="top">
+                <img :src="viewIcon" alt="查看" class="table-icon"/>
+              </el-tooltip>
             </el-button>
-            <el-button class="btn-text-primary text-btn" type="text" v-if="globeStatus !== '已完成'" @click="handleEditFn(scope.row, 'edit')">编辑
+            <el-button v-if="globeStatus !== '已完成'" class="btn-text-primary text-btn" type="text"
+                       @click="handleEditFn(scope.row, 'edit')">
+              <el-tooltip content="编辑" effect="light" placement="top" popper-class="fix-tooltip">
+                <img :src="editIcon" alt="编辑" class="table-icon"/>
+              </el-tooltip>
             </el-button>
-            <el-button :class="{ 'disabled-btn': scope.row.meetingStatus == '已结束'}" v-if="globeStatus !== '已完成'" :disabled="scope.row.meetingStatus == '已结束'" class="btn-text-danger text-btn"
+            <el-button v-if="globeStatus !== '已完成'" :class="{ 'disabled-btn': scope.row.meetingStatus == '已结束'}"
+                       :disabled="scope.row.meetingStatus == '已结束'" class="btn-text-danger text-btn"
                        type="text"
-                       @click="handleDelete(scope.row)">删除
+                       @click="handleDelete(scope.row)">
+              <el-tooltip content="删除" effect="light" placement="top" popper-class="fix-tooltip">
+                <img v-if="scope.row.meetingStatus == '已结束'" :src="deleteGrayIcon" alt="删除" class="table-icon"/>
+                <img v-else :src="deleteIcon" alt="删除" class="table-icon"/>
+              </el-tooltip>
             </el-button>
           </template>
         </el-table-column>
@@ -67,6 +82,11 @@ import {useDicStore} from '@/stores/dic.js';
 import {getDicList, getIterMembers, getIterUserStoryList} from '@/api/api';
 import {deleteMeeting, getMeetingInfo, getMeetingList, saveMeeting, updateMeeting} from '@/api/iterationApi';
 import addIcon from "@/assets/webp/add.webp";
+import editGrayIcon from "@/assets/webp/edit_gray.webp";
+import editIcon from "@/assets/webp/edit.webp";
+import deleteGrayIcon from "@/assets/webp/delete_gray.webp";
+import deleteIcon from "@/assets/webp/delete.webp";
+import viewIcon from "@/assets/webp/view-icon.webp";
 
 
 const dicStore = useDicStore()
@@ -272,6 +292,8 @@ onBeforeMount(() => {
 
 <style lang="scss" scoped>
 .main-content {
+  height: 100%;
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -283,7 +305,7 @@ onBeforeMount(() => {
       align-items: center;
 
       & > div:nth-child(1) {
-        font-size: 24px;
+        font-size: 16px;
         font-weight: bold;
         margin-right: 10px;
       }
@@ -291,14 +313,14 @@ onBeforeMount(() => {
 
     .addBtn {
       border-radius: 4px;
-      width: 116px;
+      padding: 0 12px;
 
       .btn-icon {
         margin-right: 4px;
       }
     }
 
-    margin-bottom: 37px;
+    margin-bottom: 12px;
   }
 
   .project-tag1 {
@@ -322,5 +344,11 @@ onBeforeMount(() => {
 
 :deep(.el-popper) {
   max-width: 450px !important;
+}
+
+.page-table{
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 8px;
 }
 </style>

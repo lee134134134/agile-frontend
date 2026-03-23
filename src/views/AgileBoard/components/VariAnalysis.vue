@@ -34,7 +34,7 @@ const props = defineProps(['tableData'])
     padding: 20px;
 
     .ana-title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
         margin-bottom: 20px;
     }

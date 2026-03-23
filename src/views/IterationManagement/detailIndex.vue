@@ -581,4 +581,8 @@ onMounted(() => {
   border-radius: 8px;
   padding: 12px 16px;
 }
+
+:deep(.el-tabs__nav-wrap:after){
+  height: 1px;
+}
 </style>

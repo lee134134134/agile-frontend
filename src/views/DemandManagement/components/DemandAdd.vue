@@ -379,7 +379,7 @@ onBeforeMount(async () => {
     .title-text {
       font-family: PingFang SC;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
       color: #1D1D1D;
       line-height: 22px;
       text-align: left;
@@ -399,7 +399,6 @@ onBeforeMount(async () => {
 }
 
   .dia-main {
-    padding-bottom: 50px;
     padding-left: 50px;
     padding-right: 50px;
 

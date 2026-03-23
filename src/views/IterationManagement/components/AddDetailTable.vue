@@ -1,6 +1,6 @@
 <template>
     <el-table scrollbar-always-on :data="tableData" v-loading="loading" fit stripe style="width: 100%"
-        :header-cell-style="TableRowStyle" max-height="calc(70vh - 277px)" @select="handleSelect" @select-all="handleSelect" show-overflow-tooltip>
+        :header-cell-style="TableRowStyleDia" max-height="calc(70vh - 277px)" @select="handleSelect" @select-all="handleSelect" show-overflow-tooltip>
 		<el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="storyTitle" label="用户故事" min-width="180" align="left"></el-table-column>
         <el-table-column prop="projectName" label="所属项目" min-width="120" align="left"></el-table-column>
@@ -11,7 +11,7 @@
 </template>
 <script setup>
 import { ref, reactive, watch, onBeforeMount } from 'vue';
-import { TableRowStyle } from '@/utils';
+import {TableRowStyleDia} from '@/utils';
 const emit = defineEmits(['operateFn']);
 const props = defineProps(['type', 'list']);
 const tableData = ref(props.list ?? []);

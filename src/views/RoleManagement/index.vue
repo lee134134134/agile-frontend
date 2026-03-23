@@ -40,17 +40,17 @@
             <div v-if="scope.row.name == 'admin'" style="color:#b2b2b2;font-size: 14px;">当前角色禁止操作</div>
             <div v-else>
               <el-button class="btn-text-primary" type="text"
-                         @click="handleConfig(scope.row)"><el-tooltip content="权限分配" effect="light"  placement="top">
+                         @click="handleConfig(scope.row)"><el-tooltip content="权限分配" effect="light" popper-class="fix-tooltip" placement="top">
                 <img :src="powerIcon" alt="权限分配" class="table-icon"/>
               </el-tooltip>
               </el-button>
               <el-button class="btn-text-primary" type="text" @click="handleEditFn(scope.row)">
-                <el-tooltip content="编辑" effect="light"  placement="top">
+                <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
                   <img :src="editIcon" alt="编辑" class="table-icon"/>
                 </el-tooltip>
               </el-button>
               <el-button class="btn-text-danger" type="text" @click="handleDelete(scope.row)">
-                <el-tooltip content="删除" effect="light"  placement="top">
+                <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
                   <img :src="deleteIcon" alt="删除" class="table-icon"/>
                 </el-tooltip>
               </el-button>

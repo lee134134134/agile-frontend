@@ -61,7 +61,7 @@
           <template #header>
             <div>
               <span style="font-weight: bold;margin-right: 6px;">文档标题</span>
-              <el-tooltip content="点击标题可直接编辑文档内容" effect="dark" placement="top">
+              <el-tooltip content="点击标题可直接编辑文档内容" effect="dark" popper-class="fix-tooltip" placement="top">
                 <el-icon class="m-icon">
                   <Warning/>
                 </el-icon>
@@ -93,7 +93,7 @@
             <div>
               <el-button class="btn-text-primary" type="text"
                          @click="handleCheckDetail(scope.row)">
-                <el-tooltip content="查看" effect="light"  placement="top">
+                <el-tooltip content="查看" effect="light" popper-class="fix-tooltip" placement="top">
                   <img :src="viewIcon" alt="查看" class="table-icon"/>
                 </el-tooltip>
               </el-button>
@@ -101,7 +101,7 @@
                              trigger="click">
                 <template #reference>
                   <el-button class="btn-text-primary" type="text">
-                    <el-tooltip content="下载" effect="light"  placement="top">
+                    <el-tooltip content="下载" effect="light" popper-class="fix-tooltip" placement="top">
                       <img :src="downloadIcon" alt="下载" class="table-icon"/>
                     </el-tooltip>
                   </el-button>
@@ -133,7 +133,7 @@
                   :disabled="scope.row.docStatus != 'draft' || scope.row.documentCode == null" class="btn-text-primary"
                   type="text"
                   @click="handleRelease(scope.row)">
-                <el-tooltip content="发布" effect="light"  placement="top">
+                <el-tooltip content="发布" effect="light" popper-class="fix-tooltip" placement="top">
                   <img v-if="scope.row.docStatus != 'draft' || scope.row.documentCode == null" :src="publishGrayIcon"
                        alt="发布" class="table-icon"/>
                   <img v-else :src="publishIcon" alt="发布" class="table-icon"/>
@@ -141,7 +141,7 @@
               </el-button>
               <el-button class="btn-text-danger text-btn" type="text"
                          @click="handleDele(scope.row)">
-                <el-tooltip content="删除" effect="light"  placement="top">
+                <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
                   <img :src="deleteIcon" alt="删除" class="table-icon"/>
                 </el-tooltip>
               </el-button>

@@ -41,13 +41,13 @@
             <div>
               <el-button class="btn-text-primary text-btn" type="text"
                          @click="handleView(scope.row)">
-                <el-tooltip content="查看" effect="light"  placement="top">
+                <el-tooltip content="查看" effect="light" popper-class="fix-tooltip" placement="top">
                   <img :src="viewIcon" alt="查看" class="table-icon"/>
                 </el-tooltip>
               </el-button>
               <el-button class="btn-text-primary text-btn" type="text"
                          @click="handleDown(scope.row)">
-                <el-tooltip content="下载" effect="light"  placement="top">
+                <el-tooltip content="下载" effect="light" popper-class="fix-tooltip" placement="top">
                   <img :src="downloadIcon" alt="下载" class="table-icon"/>
                 </el-tooltip>
               </el-button>

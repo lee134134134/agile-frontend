@@ -265,7 +265,7 @@ onBeforeMount(() => {
   }
 
   .title-1 {
-    margin: 16px 0;
+    margin: 16px 0 0;
 
   }
 
@@ -305,8 +305,9 @@ onBeforeMount(() => {
     border-radius: 8px;
 
     .inner-content {
+      margin-top: 12px;
       overflow-y: auto;
-      padding: 15px;
+      padding: 0 0 12px;
       height: calc(100vh - 150px);
     }
 
@@ -351,7 +352,7 @@ onBeforeMount(() => {
 
     .summary-item-nosubmit {
       justify-content: center;
-      height: 160px;
+      height: 140px;
     }
 
     .summary-item:hover {
@@ -360,13 +361,13 @@ onBeforeMount(() => {
     }
 
     .submit-status {
-      height: 24px;
-      line-height: 24px;
+      height: 28px;
+      line-height: 28px;
       padding: 0 8px;
       border-radius: 4px;
       font-size: 12px;
-      transform: scale(0.85);
       margin-top: 2px;
+      transform: scale(0.8);
     }
 
     .has-submit {
@@ -437,8 +438,8 @@ onBeforeMount(() => {
 .tag-primary {
   transform: scale(0.8);
   font-size: 12px;
-  height: 24px;
-  line-height: 24px;
+  height: 28px;
+  line-height: 28px;
   padding: 0 10px;
   color: #00993f;
   background: #dff6e8;

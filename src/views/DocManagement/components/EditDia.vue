@@ -14,11 +14,11 @@
     </template>
     <div class="dia-main">
       <div class="head-left">
-        <el-tooltip :content="diaForm.docName" effect="dark" placement="top-start">
+        <el-tooltip :content="diaForm.docName" effect="dark" popper-class="fix-tooltip" placement="top-start">
           <el-text class="doc-title" truncated>{{ diaForm.docName }}</el-text>
         </el-tooltip>
 
-        <el-tooltip content="每5分钟自动保存内容" effect="dark" placement="top">
+        <el-tooltip content="每5分钟自动保存内容" effect="dark" popper-class="fix-tooltip" placement="top">
           <div v-show="diaForm.date" class="info-text">
             <el-icon class="info-text-icon" size="14px" style="padding-top:2px">
               <CircleCheck/>
@@ -277,7 +277,7 @@ defineExpose({
     .title-text {
       font-family: PingFang SC;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
       color: #1D1D1D;
       line-height: 22px;
       text-align: left;

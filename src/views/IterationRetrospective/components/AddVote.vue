@@ -1,5 +1,6 @@
 <template>
-  <el-dialog v-model="addShow" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false" class="edit-dia"
+  <el-dialog v-model="addShow" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false"
+             class="edit-dia"
              width="1000px" @close="handleClose">
     <template #header="{ close }">
       <div class="dia-header">
@@ -34,7 +35,7 @@
 
         <el-row :gutter="24">
           <el-col :span="24">
-            <el-form-item label="意见内容" prop="content">
+            <el-form-item class="last-child" label="意见内容" prop="content">
               <el-input v-model="detailForm.content" :disabled="isDisabled" clearable maxlength="1000"
                         placeholder="请输入意见内容" show-word-limit type="textarea"/>
             </el-form-item>
@@ -341,7 +342,7 @@ onBeforeMount(async () => {
     .title-text {
       font-family: PingFang SC;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
       color: #1D1D1D;
       line-height: 22px;
       text-align: left;
@@ -491,5 +492,9 @@ onBeforeMount(async () => {
     color: #555 !important;
     font-weight: 400 !important;
   }
+}
+
+:deep(.el-form-item.last-child){
+  margin-bottom: 0;
 }
 </style>

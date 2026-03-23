@@ -1,6 +1,6 @@
 <template>
-    <div v-if="isShowChart" :id="chartId" :style="{ width, height }" ref="chartRef"></div>
-    <div v-else :style="{ width, height }"></div>
+    <div class="fix-1" v-if="isShowChart" :id="chartId" :style="{ width, height }" ref="chartRef"></div>
+    <div class="fix-2" v-else :style="{ width, height }"></div>
 </template>
 
 <script setup>
@@ -10,7 +10,7 @@ import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 const props = defineProps({
     chartId: { type: String, default: 'chart' }, // 图表唯一标识
     width: { type: String, default: '100%' }, // 宽度
-    height: { type: String, default: '300px' }, // 高度
+    height: { type: String, default: '400px' }, // 高度
     data: { type: Object, default: () => ([]) }, // 数据对象，需包含x轴类别与多系列数据
     chartTitle: { type: String, default: '' },
     rotateDeg: { type: Boolean, default: false },
@@ -151,7 +151,7 @@ function generateOption(data) {
         .title-text {
             font-family: PingFang SC;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 16px;
             color: #1D1D1D;
             line-height: 22px;
             text-align: left;

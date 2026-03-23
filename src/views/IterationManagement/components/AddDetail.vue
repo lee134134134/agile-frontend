@@ -12,7 +12,7 @@
 			</div>
 		</template>
 		<div class="dia-main">
-			<div class="search-content jus-bet-center bg-color-1 border-radius-8">
+			<div class="search-content jus-flex-start">
 				<el-form ref="searchFromRef" :model="searchFrom" :inline="true">
 					<el-form-item label="所属项目" prop="projectId">
 						<el-select v-model="searchFrom.projectCode" placeholder="请选择" clearable style="width: 260px;"  @change="handleModel">
@@ -30,12 +30,12 @@
                         style="width:100%" :disabled="!searchFrom.projectCode"></el-cascader>
 					</el-form-item>
 				</el-form>
-				<div class="search-btn jus-flex-end">
-					<div class="btn-primary btn-margin-right" @click="getStoryListFn">筛选</div>
-					<div class="btn-circle" @click="handleReset">重置</div>
-				</div>
+        <div class="search-btn flex">
+          <div class="btn-primary btn-margin-right" @click="getStoryListFn">筛选</div>
+          <div class="btn-circle" @click="handleReset">重置</div>
+        </div>
 			</div>
-			<div style="margin-top: 16px;margin-bottom: 32px;">
+			<div style="margin-top: 16px;margin-bottom: 16px;">
 				<AddDetailTable  :list="tableData"  @operateFn="handleSelectStory"></AddDetailTable>
 			</div>
 			<div class="dia-footer jus-flex-end">
@@ -155,7 +155,7 @@
 			.title-text {
 				font-family: PingFang SC;
 				font-weight: 600;
-				font-size: 18px;
+				font-size: 16px;
 				color: #1D1D1D;
 				line-height: 22px;
 				text-align: left;
@@ -187,6 +187,7 @@
             gap: 12px;
 			.btn-cancel {
 				margin-left: 12px;
+        margin-right: 0;
 			}
 		}
 
@@ -222,12 +223,9 @@
 
 
 	.search-content {
-		margin-top: 25px;
-		padding: 0 20px;
-		height: 72px;
+		margin: 0 0 12px;
 
 		.search-btn {
-			margin-left: 20px;
 			// padding-right: 20px;
 		}
 
@@ -250,4 +248,26 @@
 		min-height: 28px;
 		border-radius: 4px;
 	}
+
+  .btn-primary{
+    height: 28px;
+    line-height: 26px;
+    border-radius: 4px;
+    width: auto;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .btn-circle{
+    height: 28px;
+    line-height: 26px;
+    border-radius: 4px;
+    width: auto;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  :deep(.el-form--inline .el-form-item){
+    margin-right: 16px;
+  }
 </style>

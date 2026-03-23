@@ -55,8 +55,8 @@
             </div>
             <el-progress v-if="item.projectProgress >= '0'" :percentage="item.projectProgress * 1"
                          color="#2173f7" style="width:70%"></el-progress>
-            <div v-else>
-              <el-icon color="#ff7d00" style="vertical-align: middle;">
+            <div class="info-blue-text" v-else>
+              <el-icon color="#ff7d00" style="vertical-align: -3px;">
                 <WarningFilled/>
               </el-icon>
               请及时完善项目信息
@@ -235,7 +235,6 @@ onBeforeMount(async () => {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-top: 12px;
   max-height: calc(100vh - 150px);
   overflow-y: auto;
   align-items: flex-start;
@@ -291,5 +290,9 @@ onBeforeMount(async () => {
 .info-footer{
   padding-top: 12px;
   border-top: 1px solid #e2e4e8;
+}
+
+.info-blue-text{
+  color: #ff7d00;
 }
 </style>

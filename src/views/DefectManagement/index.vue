@@ -165,7 +165,7 @@
                        :disabled="scope.row.fileInfo.length == 0"
                        class="btn-text-primary text-btn"
                        type="text" @click="handleDownload(scope.row)">
-              <el-tooltip content="下载附件" effect="light"  placement="top">
+              <el-tooltip content="下载附件" effect="light" popper-class="fix-tooltip" placement="top">
                 <img v-if="scope.row.fileInfo.length == 0" :src="annexGrayIcon" alt="下载附件" class="table-icon table-icon-gray"/>
                 <img v-else :src="annexIcon" alt="下载附件" class="table-icon"/>
               </el-tooltip>
@@ -174,7 +174,7 @@
                        :disabled="!canEditDefect || !scope.row.editFlag"
                        class="btn-text-primary text-btn"
                        type="text" @click="handleEditFn(scope.row, 'edit')">
-              <el-tooltip content="编辑" effect="light"  placement="top">
+              <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
                 <img v-if="!canEditDefect || !scope.row.editFlag" :src="editGrayIcon" alt="编辑" class="table-icon"/>
                 <img v-else :src="editIcon" alt="编辑" class="table-icon"/>
               </el-tooltip>
@@ -183,7 +183,7 @@
                        :disabled="!canDeleteDefect || !scope.row.editFlag"
                        class="btn-text-danger text-btn"
                        type="text" @click="handleDelete(scope.row)">
-              <el-tooltip content="删除" effect="light"  placement="top">
+              <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
                 <img v-if="!canDeleteDefect || !scope.row.editFlag" :src="deleteGrayIcon" alt="删除" class="table-icon"/>
                 <img v-else :src="deleteIcon" alt="删除" class="table-icon"/>
               </el-tooltip>
@@ -191,7 +191,7 @@
             <el-button :class="{ 'disabled-btn': !canDeleteDefect }" :disabled="!canDeleteDefect"
                        class="btn-text-primary text-btn"
                        type="text" @click="handleLink(scope.row)">
-              <el-tooltip content="关联" effect="light"  placement="top">
+              <el-tooltip content="关联" effect="light" popper-class="fix-tooltip" placement="top">
                 <img v-if="!canDeleteDefect" :src="linkedGrayIcon" alt="关联" class="table-icon"/>
                 <img v-else :src="linkedIcon" alt="关联" class="table-icon"/>
               </el-tooltip>
@@ -913,7 +913,7 @@ onMounted(() => {
       justify-content: space-between;
 
       .title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
       }
     }
@@ -1050,6 +1050,7 @@ onMounted(() => {
     height: 28px;
     line-height: 28px;
     padding: 0 12px;
+    font-size: 12px;
 
     .btn-icon {
       width: 12px;

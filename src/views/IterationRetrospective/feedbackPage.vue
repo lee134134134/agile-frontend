@@ -294,7 +294,7 @@ onBeforeMount(() => {
   }
 
   .page-search {
-    margin-bottom: 40px;
+    margin-bottom: 12px;
 
     .title-1 {
       display: flex;
@@ -302,7 +302,7 @@ onBeforeMount(() => {
       justify-content: space-between;
 
       .title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
       }
     }
@@ -363,11 +363,12 @@ onBeforeMount(() => {
 
       b{
         color: #333;
+        font-weight: bold;
       }
     }
 
     .inner-content {
-      padding: 15px;
+      padding: 0 15px 0 0;
       background-color: #FFF;
       height: calc(100vh - 300px);
       overflow: auto;

@@ -495,7 +495,7 @@ onBeforeMount(async () => {
     .title-text {
       font-family: PingFang SC;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
       color: #1D1D1D;
       line-height: 22px;
       text-align: left;
@@ -534,7 +534,7 @@ onBeforeMount(async () => {
     .title-2 {
       margin: 0;
       padding: 15px;
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .inner-content {
