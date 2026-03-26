@@ -20,7 +20,7 @@
         <el-form ref="searchFromRef" :model="searchFrom">
           <div class="flex">
             <el-form-item label="迭代" prop="sprintCode">
-              <el-select v-model="searchFrom.sprintCode" clearable placeholder="全部" style="width: 140px;">
+              <el-select v-model="searchFrom.sprintCode" clearable placeholder="全部" style="width: 200px;">
                 <el-option v-for="item in iterationList" :key="item.code" :label="item.name"
                            :value="item.code"/>
               </el-select>

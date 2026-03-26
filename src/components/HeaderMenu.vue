@@ -8,11 +8,12 @@
   </div>
 </template>
 <script setup>
-import {onMounted, ref, watch} from 'vue';
+import {onMounted, onUnmounted, ref, watch} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import MenuItem from './MenuItem.vue';
 import {useUserStore} from "@/stores/user";
 import {detailRoute} from '@/router/baseRoutes.js'
+import bus from "@/utils/bus.js";
 
 const store = useUserStore()
 const route = useRoute()
@@ -38,42 +39,25 @@ watch(() => route.path, (newValue) => {
   }
 }, {immediate: true});
 
-onMounted(() => {
+const refreshMenu = () => {
   let router = localStorage.getItem('agiles_menuList') ? JSON.parse(localStorage.getItem('agiles_menuList')) : []
   router = router.filter(item => item.isOvert == 1 || item.isBusiness == 1)
   if (router && router.length > 0) {
     menuList.value = router
-    // let list = router.map(item => ({
-    //     path: item.path,
-    //     parentId: item.parentId,
-    //     name: item.name,
-    //     navShow: item.navShow == 1 ? true : false,
-    //     isInnerPage: item.isInnerPage == 1 ? true : false,
-    //     isSystem: item.isSystem == 1 ? true : false,
-    //     isTool: item.isTool == 1 ? true : false,
-    //     meta: item.metaVO,
-    //     isChildren: item.name == 'monthStatisticsPage' ? true : false,
-    //     childrenName: item.name == 'statisticsManagement' ? 'monthStatisticsPage' : '',
-    //     // isChildren: item.isChildren ? item.isChildren : false,
-    //     // childrenName: item.childrenName ?? ''
-    // }))
-
-    // list.forEach(item => {
-    //     if (item.navShow == '1') {
-    //         if (item.isChildren == false) {
-    //             if (item.parentId == 1) {
-    //                 let child = list.filter(child => child.name == item.childrenName)
-    //                 Object.assign(item, {
-    //                     children: child
-    //                 })
-    //                 menuList.value.push(item)
-    //             } else {
-    //                 c.push(item)
-    //             }
-    //         }
-    //     }
-    // });
   }
+}
+
+onMounted(() => {
+  bus.on('refreshMenu',refreshMenu)
+  let router = localStorage.getItem('agiles_menuList') ? JSON.parse(localStorage.getItem('agiles_menuList')) : []
+  router = router.filter(item => item.isOvert == 1 || item.isBusiness == 1)
+  if (router && router.length > 0) {
+    menuList.value = router
+  }
+})
+
+onUnmounted(()=>{
+  bus.off('refreshMenu', refreshMenu)
 })
 
 </script>

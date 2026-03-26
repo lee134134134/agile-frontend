@@ -177,12 +177,14 @@ onMounted(() => {
 }
 
 .dia-main {
-  // padding-bottom: 30px;
-  // padding-left: 20px;
-  // padding-right: 20px;
 
   .dia-main-content {
-    // margin-bottom: 10px;
+    overflow-y: hidden;
+
+    :deep(.el-form-item__content){
+      height: auto;
+    }
+
     .sel-opt-text {
       color: #333;
       font-weight: 600;
@@ -247,7 +249,7 @@ onMounted(() => {
   }
 
   .close-btn {
-    padding: 5px 20px;
+    padding: 0 16px;
   }
 
   .module-title {

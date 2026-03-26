@@ -291,7 +291,7 @@ watch(() => props.curSprintId, () => {
   }
 
   .filter-item {
-    padding: 1px 8px;
+    padding: 2px 8px;
     font-size: 12px;
     cursor: pointer;
     border-radius: 4px;

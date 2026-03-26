@@ -67,7 +67,7 @@
           <template #header>
             <div>
               <span style="font-weight: bold;margin-right: 6px;">文档标题</span>
-              <el-tooltip content="点击标题可直接编辑文档内容" effect="dark" popper-class="fix-tooltip" placement="top">
+              <el-tooltip content="点击标题可直接编辑文档内容" effect="dark" placement="top" popper-class="fix-tooltip">
                 <el-icon class="m-icon">
                   <Warning/>
                 </el-icon>
@@ -97,7 +97,7 @@
             <div>
               <el-button class="btn-text-primary" type="text"
                          @click="handleCheckDetail(scope.row)">
-                <el-tooltip content="查看" effect="light" popper-class="fix-tooltip" placement="top">
+                <el-tooltip content="查看" effect="light" placement="top" popper-class="fix-tooltip">
                   <img :src="viewIcon" alt="查看" class="table-icon"/>
                 </el-tooltip>
               </el-button>
@@ -105,7 +105,7 @@
                              trigger="click">
                 <template #reference>
                   <el-button class="btn-text-primary" type="text">
-                    <el-tooltip content="下载" effect="light" popper-class="fix-tooltip" placement="top">
+                    <el-tooltip content="下载" effect="light" placement="top" popper-class="fix-tooltip">
                       <img :src="downloadIcon" alt="下载" class="table-icon"/>
                     </el-tooltip>
                   </el-button>
@@ -129,14 +129,14 @@
                   </div>
                 </template>
               </el-popconfirm>
-<!--              <el-button :class="isRoleOpt(scope.row.roles) == false ? 'disabled-btn' : 'text-btn'"-->
-<!--                         :disabled="isRoleOpt(scope.row.roles) == false" class="btn-text-primary"-->
-<!--                         type="text"-->
-<!--                         @click="handleEditDetail(scope.row)">-->
-<!--                <img v-if="isRoleOpt(scope.row.roles) == false" :src="editGrayIcon" alt="编辑" class="table-icon"-->
-<!--                     title="编辑"/>-->
-<!--                <img v-else :src="editIcon" alt="编辑" class="table-icon" title="编辑"/>-->
-<!--              </el-button>-->
+              <!--              <el-button :class="isRoleOpt(scope.row.roles) == false ? 'disabled-btn' : 'text-btn'"-->
+              <!--                         :disabled="isRoleOpt(scope.row.roles) == false" class="btn-text-primary"-->
+              <!--                         type="text"-->
+              <!--                         @click="handleEditDetail(scope.row)">-->
+              <!--                <img v-if="isRoleOpt(scope.row.roles) == false" :src="editGrayIcon" alt="编辑" class="table-icon"-->
+              <!--                     title="编辑"/>-->
+              <!--                <img v-else :src="editIcon" alt="编辑" class="table-icon" title="编辑"/>-->
+              <!--              </el-button>-->
               <!-- <el-button type="text" class="btn-text-primary">授权</el-button> -->
               <el-button
                   :class="isRoleOpt(scope.row.roles) == false || scope.row.archiveStatus == 1 ? 'disabled-btn' : 'text-btn'"
@@ -144,7 +144,7 @@
                   class="btn-text-danger"
                   type="text"
                   @click="handleDele(scope.row)">
-                <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
+                <el-tooltip content="删除" effect="light" placement="top" popper-class="fix-tooltip">
                   <img v-if="isRoleOpt(scope.row.roles) == false || scope.row.archiveStatus == 1" :src="deleteGrayIcon"
                        alt="删除" class="table-icon"/>
                   <img v-else :src="deleteIcon" alt="删除" class="table-icon"/>
@@ -161,8 +161,8 @@
       </div>
     </div>
     <ProDocDiaVue v-if="isOperateDia" :detailInfo="detailInfo" :isShow="isOperateDia" :temList="temList"
-                  :type="operateType" @closeDiaFn="handleCloseDia" @editDiaFn="handleEditDia" @confirmFn="handleAddData"
-                  @editConfirmFn="handleEditSubFn">
+                  :type="operateType" @closeDiaFn="handleCloseDia" @confirmFn="handleAddData" @editConfirmFn="handleEditSubFn"
+                  @editDiaFn="handleEditDia">
     </ProDocDiaVue>
     <EditDia v-if="isEditComShow" ref="emitRef" :info="editorParams" :isShow="isEditComShow" :type="editorDiaType"
              @closeDiaFn="handleCloseEditor" @confirmAutoFn="handleUpDateEditor" @confirmFn="handleAddEditor"
@@ -194,8 +194,6 @@ import {getDicList, getUserProjectList} from '@/api/api.js';
 import {useDicStore} from '@/stores/dic.js';
 import {getAllProjectList} from '@/api/demand.js';
 import {Warning} from "@element-plus/icons-vue";
-import editGrayIcon from "@/assets/webp/edit_gray.webp";
-import editIcon from "@/assets/webp/edit.webp";
 import deleteGrayIcon from "@/assets/webp/delete_gray.webp";
 import deleteIcon from "@/assets/webp/delete.webp";
 import viewIcon from "@/assets/webp/view-icon.webp";
@@ -397,7 +395,7 @@ const handleDele = (data) => {
   }).then(() => {
     proDocDeleFn({id: data.id}).then(res => {
       if (res.success) {
-        ElMessage.success('操作成功！')
+        ElMessage.success({message: '操作成功！', duration: 1500})
         getList()
       }
     })
@@ -462,7 +460,7 @@ const handleAddEditor = (data) => {
   //保存编辑器内容
   $http.put(`agile-biz/api/document/project/upload`, data).then(res => {
     if (res.success) {
-      ElMessage.success('文档保存成功！')
+      ElMessage.success({message: '文档保存成功！', duration: 1500})
       emitRef.value.getHistoryListFn()
       // getList()
       // isEditComShow.value = false
@@ -475,7 +473,7 @@ const handleUpDateEditor = (data) => {
   //自动保存
   $http.put(`agile-biz/api/document/project/upload`, data).then(res => {
     if (res.success) {
-      ElMessage.success('自动保存成功！')
+      ElMessage.success({message: '自动保存成功！', duration: 1500})
       editorParams.value.date = res.data.updatedAt
     }
   })
@@ -764,7 +762,7 @@ onBeforeMount(async () => {
   }
 }
 
-.no-text{
+.no-text {
   color: #666;
 }
 </style>

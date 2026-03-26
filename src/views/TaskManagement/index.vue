@@ -198,7 +198,7 @@
         </div>
       </div>
     </div>
-    <OperateTask v-if="isOperateDia" :demandId="currentId" :detailInfo="detailInfo" :isShow="isOperateDia"
+    <OperateTask v-if="isOperateDia" :demandId="currentId" :demandObj="currentObj" :detailInfo="detailInfo" :isShow="isOperateDia"
                  :leaderList="leaderList" :type="operateType" @closeDiaFn="handleCloseDia" @confirmFn="handleAddData"
                  @editConfirmFn="handleEditSubFn"></OperateTask>
   </div>
@@ -239,6 +239,7 @@ const priorityList = ref([])//故事优先级下拉列表
 const modelListLoad = ref(false)
 const moduleList = ref([])
 const currentId = ref(undefined)//选中的故事
+const currentObj = ref({})
 const currentStoryStatus = ref('')// 选中的故事状态
 const isOperateDia = ref(false)
 const operateType = ref('')
@@ -300,6 +301,7 @@ async function storyListFn() {
 
 const handleSelectStory = (data) => {
   currentId.value = data.storyCode
+  currentObj.value = data
   currentStoryStatus.value = data.status
   leaderList.value = []
   searchTaskForm.storyCode = data.storyCode
@@ -782,5 +784,9 @@ onBeforeMount(async () => {
   height: 28px;
   line-height: 26px;
   padding: 0 16px;
+}
+
+.title-2{
+  font-size: 14px;
 }
 </style>

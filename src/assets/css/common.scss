@@ -1,4 +1,9 @@
 /* color palette from <https://github.com/vuejs/theme> */
+.el-table{
+  --el-table-border-color: #e2e4e8;
+  --el-table-row-hover-bg-color: #f0f6ff;
+}
+
 :root {
   --color-brand: #2173f7;
   --color-bg: #f5F7FA;
@@ -18,7 +23,7 @@
   --el-color-primary: #2173f7;
   --el-fill-color-light: #f5f9ff;
   --el-color-primary-light-9: #e5efff;
-  --el-fill-color-lighter: #f9f9f9;
+  --el-fill-color-lighter: #fafafa;
   --el-border-color: #e7e7e7;
   --el-border-radius-base: 4px;
   --el-text-color-placeholder: #a4a4a4;
@@ -26,7 +31,6 @@
   --el-component-size: 48px;
   --el-select-input-font-size: 12px;
 }
-
 
 //主题A
 html[data-theme='theme-A'] {
@@ -48,7 +52,7 @@ html[data-theme='theme-A'] {
   --el-color-primary: #2173f7;
   --el-fill-color-light: #f5f9ff;
   --el-color-primary-light-9: #e5efff;
-  --el-fill-color-lighter: #f9f9f9;
+  --el-fill-color-lighter: #fafafa;
   --el-border-color: #e7e7e7;
   --el-border-radius-base: 8px;
   --el-text-color-placeholder: #a4a4a4;
@@ -76,7 +80,7 @@ html[data-theme='theme-A'] {
   --el-color-primary: #2173f7;
   --el-fill-color-light: #f5f9ff;
   --el-color-primary-light-9: #e5efff;
-  --el-fill-color-lighter: #f9f9f9;
+  --el-fill-color-lighter: #fafafa;
   --el-border-color: #DBDDE3;
   --el-border-radius-base: 8px;
   --el-text-color-placeholder: #a4a4a4;
@@ -105,7 +109,7 @@ html[data-theme='theme-B'] {
   --el-color-primary: #666;
   --el-fill-color-light: #f5f9ff;
   --el-color-primary-light-9: #e5efff;
-  --el-fill-color-lighter: #f9f9f9;
+  --el-fill-color-lighter: #fafafa;
   --el-border-color: #DBDDE3;
   --el-border-radius-base: 8px;
   --el-text-color-placeholder: #a4a4a4;
@@ -133,7 +137,7 @@ html[data-theme='theme-B'] {
   --el-color-primary: #666;
   --el-fill-color-light: #f5f9ff;
   --el-color-primary-light-9: #e5efff;
-  --el-fill-color-lighter: #f9f9f9;
+  --el-fill-color-lighter: #fafafa;
   --el-border-color: #DBDDE3;
   --el-border-radius-base: 8px;
   --el-text-color-placeholder: #a4a4a4;
@@ -1066,6 +1070,7 @@ ul {
     height: 37px;
     line-height: 37px;
     padding: 0;
+    background: #fff;
   }
 }
 
@@ -1533,4 +1538,17 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 
 .fix-tooltip > span{
   font-size: 12px;
+}
+
+.w-e-bar-item > button{
+  &[data-menu-key='group-video'],&[data-menu-key='group-image']{
+    display: none !important;
+  }
+}
+
+.el-table .el-table__cell {
+  height: 37px;
+  line-height: 37px;
+  padding: 0;
+  background: #fff;
 }

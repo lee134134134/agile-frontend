@@ -41,31 +41,28 @@
           </div>
         </div>
       </div>
-      <div class="nav-bar jus-start-center gap12">
-        <div class="nav-item" @click="scrollToSection('severity')">按严重程度统计</div>
-        <div class="nav-item" @click="scrollToSection('type')">按缺陷类型统计</div>
-        <div class="nav-item" @click="scrollToSection('personnel')">人员缺陷统计</div>
-        <div class="nav-item" @click="scrollToSection('story')">用户故事缺陷分布</div>
-      </div>
+<!--      <div class="nav-bar jus-start-center gap12">-->
+<!--        <div class="nav-item" @click="scrollToSection('severity')">按严重程度统计</div>-->
+<!--        <div class="nav-item" @click="scrollToSection('type')">按缺陷类型统计</div>-->
+<!--        <div class="nav-item" @click="scrollToSection('personnel')">人员缺陷统计</div>-->
+<!--        <div class="nav-item" @click="scrollToSection('story')">用户故事缺陷分布</div>-->
+<!--      </div>-->
       <section class="rpt-overview-view-scroll">
-        <div id="severity">
-          <BarChart v-if="detailObj.severityList" :chartTitle="'按严重程度统计'" :data="detailObj.severityList"
-                    class="mt10 mlp15"/>
+        <div class="item" id="severity">
+          <BarChart v-if="detailObj.severityList" :chartTitle="'按严重程度统计'" :data="detailObj.severityList"/>
         </div>
 
-        <div id="type">
-          <BarLineChart v-if="detailObj.defectTypeList" :chartTitle="'按缺陷类型统计'" :data="detailObj.defectTypeList"
-                        class="mt44"/>
+        <div class="item" id="type">
+          <BarLineChart v-if="detailObj.defectTypeList" :chartTitle="'按缺陷类型统计'" :data="detailObj.defectTypeList"/>
         </div>
 
-        <div id="personnel">
+        <div class="item" id="personnel">
           <BarLineChart v-if="detailObj.leaderList" :chartTitle="'人员缺陷统计'" :data="detailObj.leaderList"
-                        class="mt44 splitPages"/>
+                        class="splitPages"/>
         </div>
 
-        <div id="story">
-          <BarChart v-if="detailObj.storyList" :bottomPos="150" :chartTitle="'用户故事缺陷分布'"
-                    :data="detailObj.storyList" :rotateDeg="true" class="mt44 splitPages"/>
+        <div class="item" id="story">
+          <BarChart v-if="detailObj.storyList" :chartTitle="'用户故事缺陷分布'" :data="detailObj.storyList" class="splitPages"/>
         </div>
       </section>
     </div>
@@ -179,7 +176,6 @@ onMounted(() => {
 
   .rpt-overview-view {
     padding-right: 8px;
-    margin-top: 10px;
   }
 
   // 保持原有样式
@@ -230,7 +226,18 @@ onMounted(() => {
 
 .rpt-overview-view-scroll{
   overflow-y: auto;
-  height: calc(100vh - 340px);
+  height: calc(100vh - 280px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0 10px;
+  align-content: flex-start;
+
+  .item{
+    flex: 0 0 calc(50% - 8px);
+  }
+
+
 
   &::-webkit-scrollbar {
     width: 4px;

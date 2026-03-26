@@ -1,7 +1,7 @@
 // 表格头部颜色字号
 export function TableRowStyle({ row, column, rowIndex, columnIndex }) {
   return {
-    background: "#E6EEFF",
+    background: "#e4efff",
     fontSize: "14px",
     color: "#333",
     height: "36px",
@@ -11,7 +11,7 @@ export function TableRowStyle({ row, column, rowIndex, columnIndex }) {
 
 export function TableRowStyleDia({ row, column, rowIndex, columnIndex }) {
   return {
-    background: "#eff4fe",
+    background: "#e4efff",
     fontSize: "14px",
     color: "#333",
     height: "36px",

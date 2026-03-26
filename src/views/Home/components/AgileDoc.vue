@@ -8,7 +8,7 @@
     </div>
     <div id="docView" ref="docViewRef" class="list-content">
       <el-table :class="{'height':!isHeight}" :data="listData" :default-expand-all="false"
-                :header-cell-style="TableRowStyle3Fixed" fit
+                :header-cell-style="TableRowStyle" fit
                 height="calc(100vh - 724px)" row-key="id" scrollbar-always-on stripe
                 style="width: 100%">
         <el-table-column v-if="activeTab === '项目文档'" align="left" fixed label="文档名称" min-width="350"
@@ -38,7 +38,7 @@ import {onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import {getKnowledgeListViewFn, getProListFn} from '@/api/docManage.js';
 import reviewDia from './reviewDia.vue';
 import {useDicStore} from "@/stores/dic.js";
-import {TableRowStyle3Fixed} from "@/utils/index.js";
+import {TableRowStyle} from "@/utils/index.js";
 
 const docViewRef = ref(null)
 const activeTab = ref('项目文档')
@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
 }
 
 .tap-text {
-  color: #1D7CFF;
+  color: #2173f7;
   text-decoration: underline;
   cursor: pointer;
 }

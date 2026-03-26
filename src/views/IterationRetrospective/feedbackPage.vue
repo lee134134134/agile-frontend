@@ -423,4 +423,10 @@ onBeforeMount(() => {
   background-size: contain;
   vertical-align: -6px;
 }
+
+.opt-btn{
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
+}
 </style>

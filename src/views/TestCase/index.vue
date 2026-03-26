@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="search-content jus-bet-start bg-color-1 border-radius-8">
-        <el-form class="flex flex-content" ref="searchFormRef" :model="searchForm" label-position="left">
+        <el-form ref="searchFormRef" :model="searchForm" class="flex flex-content" label-position="left">
           <el-form-item label="标题编号" prop="title">
             <el-input v-model="searchForm.title" clearable placeholder="请输入用例编号或标题"
                       style="width: 160px;"></el-input>
@@ -113,7 +113,9 @@
                 stripe @select="handleSelect" @select-all="handleSelect">
         <el-table-column fixed type="selection" width="50"/>
         <el-table-column v-for="(item, index) in tableColums.filter(item => item.isSelect == true)"
-                         :key="item.prop + index" :fixed="item.prop == 'title' ? 'left' : item.prop == 'isAutomated' ? 'right' : false" :label="item.label"
+                         :key="item.prop + index"
+                         :fixed="item.prop == 'title' ? 'left' : item.prop == 'isAutomated' ? 'right' : false"
+                         :label="item.label"
                          :min-width="item.width" :width="fixedWidthColumns.includes(item.prop) ? item.width: ''"
                          align="left">
           <template #default="{ row, column, $index }">
@@ -130,7 +132,7 @@
                          :value="item.value"/>
             </el-select>
             <el-select v-else-if="item.prop == 'executionStatus'" v-model="row[`${item.prop}`]"
-                       :disabled="!canEditCase" size="small" filterable placeholder="请选择"
+                       :disabled="!canEditCase" filterable placeholder="请选择" size="small"
                        @change="handleChangeExeStatus($event, row)">
               <el-option v-for="item in dicStore.executeStatusList" :key="item.value" :label="item.name"
                          :value="item.value"/>
@@ -149,23 +151,46 @@
             <div v-else-if="item.prop == 'isAutomated'" class="jus-start-center gap16">
               <span>{{ row[`${item.prop}`] ? '是' : '否' }}</span>
               <div v-if="row[`${item.prop}`]" class="auto-icon-box jus-start-center">
-                <img alt="" src="../../assets/images/testCase/edit.png" title='编辑'
-                     @click="handleOpenAutoCaseDia(row)">
-                <img alt="" src="../../assets/images/testCase/clear.png" title='清除'
-                     @click="handleClearCase(row)">
+                <el-tooltip content="编辑" effect="light" placement="top" popper-class="fix-tooltip">
+                  <img alt="" src="../../assets/images/testCase/edit.png"
+                       @click="handleOpenAutoCaseDia(row)">
+                </el-tooltip>
+                <el-tooltip content="清除" effect="light" placement="top" popper-class="fix-tooltip">
+                  <img alt="" src="../../assets/images/testCase/clear.png"
+                       @click="handleClearCase(row)">
+                </el-tooltip>
+
                 <div class="execute-box jus-start-center">
-                  <img v-if="row.execStatus != 'pending' && row.execStatus != 'queued' && row.execStatus != 'running'"
-                       alt=""
-                       src="../../assets/images/testCase/execute.png" title='立即执行' @click="handleExecute(row)">
-                  <img v-else alt="" class="rotate-loading"
-                       src="../../assets/images/testCase/loading.png" title='用例执行中'>
-                  <img v-show="row.execStatus == 'passed'" alt="" src="../../assets/images/testCase/success.png"
-                       title='最后一次执行详情' @click="getAutoRes(row)">
-                  <img v-show="row.execStatus == 'failed'" alt="" src="../../assets/images/testCase/fail.png"
-                       title="最后一次执行详情" @click="getAutoRes(row)">
+                  <section
+                      v-if="row.execStatus !== 'pending' && row.execStatus !== 'queued' && row.execStatus !== 'running'">
+                    <el-tooltip content="立即执行" effect="light" placement="top" popper-class="fix-tooltip">
+                      <img alt="" src="../../assets/images/testCase/execute.png" @click="handleExecute(row)">
+                    </el-tooltip>
+                  </section>
+                  <section v-else>
+                    <el-tooltip content="用例执行中" effect="light" placement="top" popper-class="fix-tooltip">
+                      <img alt="" class="rotate-loading" src="../../assets/images/testCase/loading.png">
+                    </el-tooltip>
+                  </section>
+
+                  <section v-show="row.execStatus === 'passed'">
+                    <el-tooltip content="最后一次执行详情" effect="light"
+                                placement="top" popper-class="fix-tooltip">
+                      <img alt="" src="../../assets/images/testCase/success.png" @click="getAutoRes(row)">
+                    </el-tooltip>
+                  </section>
+                  <section v-show="row.execStatus === 'failed'" >
+                    <el-tooltip content="最后一次执行详情" effect="light"
+                                placement="top" popper-class="fix-tooltip">
+                      <img alt="" src="../../assets/images/testCase/fail.png" @click="getAutoRes(row)">
+                    </el-tooltip>
+                  </section>
                 </div>
-                <img v-if="row.execStatus" alt="" src="../../assets/images/testCase/history.png" title="历史执行记录"
-                     @click="handleOpenAutoHistoryDia(row)">
+
+                <el-tooltip v-if="row.execStatus" content="历史执行记录" effect="light" placement="top"
+                            popper-class="fix-tooltip">
+                  <img alt="" src="../../assets/images/testCase/history.png" @click="handleOpenAutoHistoryDia(row)">
+                </el-tooltip>
               </div>
             </div>
 
@@ -181,14 +206,14 @@
             <el-button :class="{ 'disabled-btn': !canEditCase }" :disabled="!canEditCase"
                        class="btn-text-primary text-btn"
                        type="text" @click="handleEditFn(scope.row, 'edit')">
-              <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
+              <el-tooltip content="编辑" effect="light" placement="top" popper-class="fix-tooltip">
                 <img :src="editIcon" alt="编辑" class="table-icon"/>
               </el-tooltip>
             </el-button>
             <el-button :class="{ 'disabled-btn': !canDeleteCase }" :disabled="!canDeleteCase"
                        class="btn-text-danger text-btn"
                        type="text" @click="handleDelete(scope.row)">
-              <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
+              <el-tooltip content="删除" effect="light" placement="top" popper-class="fix-tooltip">
                 <img :src="deleteIcon" alt="删除" class="table-icon"/>
               </el-tooltip>
             </el-button>
@@ -1307,7 +1332,7 @@ onMounted(() => {
       font-size: 12px;
       cursor: pointer;
 
-      span{
+      span {
         font-size: 12px;
       }
 
@@ -1450,6 +1475,7 @@ onMounted(() => {
     gap: 12px;
 
     img {
+      height: 14px;
       width: 14px;
       cursor: pointer;
     }
@@ -1532,8 +1558,8 @@ onMounted(() => {
   height: 24px !important;
 }
 
-:deep(.el-select--small .el-select__wrapper){
-  padding: 0 12px!important;
+:deep(.el-select--small .el-select__wrapper) {
+  padding: 0 12px !important;
   height: 24px !important;
   min-height: 24px !important;
   margin-top: -2px;
@@ -1574,6 +1600,7 @@ onMounted(() => {
 
   .btn-icon {
     width: 14px;
+    height: 14px;
     margin-right: 6px;
     vertical-align: -2px;
   }
@@ -1640,7 +1667,7 @@ onMounted(() => {
   height: 37px;
   padding: 0;
 
-  .cell{
+  .cell {
     height: 37px;
     line-height: 37px;
   }
@@ -1655,17 +1682,17 @@ onMounted(() => {
   position: absolute;
 }
 
-.flex-content{
+.flex-content {
   align-items: center;
   flex-wrap: wrap;
   gap: 24px;
 }
 
-:deep( .el-select){
+:deep( .el-select) {
   height: 27px;
 }
 
-:deep(.el-form-item__content){
+:deep(.el-form-item__content) {
   line-height: 27px;
   height: 27px;
 }

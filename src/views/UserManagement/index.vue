@@ -2,7 +2,9 @@
   <div class="main-content">
     <div class="page-search">
       <div class="title-1">用户管理</div>
-      <div class="search-content jus-bet-start bg-color-1 border-radius-8">
+    </div>
+    <section class="table-wrapper">
+      <div class="search-content jus-bet-start">
         <el-form ref="userFromRef" :model="userFrom" label-position="left">
           <div class="flex">
             <el-form-item label="账号" prop="name">
@@ -49,73 +51,73 @@
           </div>
         </el-form>
       </div>
-    </div>
-    <div class="page-table">
-      <!--      <div class="title-2">用户列表</div>-->
-      <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit
-                max-height="calc(100vh - 430px)" scrollbar-always-on
-                stripe style="width: 100%">
-        <!-- <el-table-column prop="id" label="ID" min-width="100" align="center"></el-table-column> -->
-        <el-table-column align="left" label="用户状态" min-width="100">
-          <template #default="scope">
-            <div v-if="scope.row.status == '1'" class="status-on ">启用中</div>
-            <div v-else class="status-off">禁用中</div>
-          </template>
-        </el-table-column>
+      <div class="page-table">
+        <!--      <div class="title-2">用户列表</div>-->
+        <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit
+                  max-height="calc(100vh - 430px)" scrollbar-always-on
+                  stripe style="width: 100%">
+          <!-- <el-table-column prop="id" label="ID" min-width="100" align="center"></el-table-column> -->
+          <el-table-column align="left" label="用户状态" min-width="100">
+            <template #default="scope">
+              <div v-if="scope.row.status == '1'" class="status-on ">启用中</div>
+              <div v-else class="status-off">禁用中</div>
+            </template>
+          </el-table-column>
 
-        <el-table-column align="left" label="账号" min-width="200" prop="name">
-          <template #default="scope">
-            <div class="jus-start-center">
-              <div class="cell-content">{{ scope.row.name }}</div>
-              <div v-show="scope.row.name == userName" class="current-user">当前用户</div>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column align="left" label="姓名" min-width="120" prop="nickname"></el-table-column>
-        <el-table-column align="left" label="邮箱" min-width="200" prop="email"></el-table-column>
-        <el-table-column align="left" label="岗位" min-width="120" prop="positionName"></el-table-column>
-        <el-table-column align="left" label="角色" min-width="400" prop="role" show-overflow-tooltip></el-table-column>
-        <el-table-column align="left" label="操作" width="150">
-          <template #default="scope">
-            <div v-if="scope.row.name != userName">
-              <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
-                         type="text"
-                         @click="handleResetWord(scope.row)">
-                <el-tooltip content="重置密码" effect="light" popper-class="fix-tooltip" placement="top">
-                  <img :src="passwordIcon" alt="重置密码" class="table-icon"/>
+          <el-table-column align="left" label="账号" min-width="200" prop="name">
+            <template #default="scope">
+              <div class="jus-start-center">
+                <div class="cell-content">{{ scope.row.name }}</div>
+                <div v-show="scope.row.name == userName" class="current-user">当前用户</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column align="left" label="姓名" min-width="120" prop="nickname"></el-table-column>
+          <el-table-column align="left" label="邮箱" min-width="200" prop="email"></el-table-column>
+          <el-table-column align="left" label="岗位" min-width="120" prop="positionName"></el-table-column>
+          <el-table-column align="left" label="角色" min-width="400" prop="role" show-overflow-tooltip></el-table-column>
+          <el-table-column align="left" label="操作" width="150">
+            <template #default="scope">
+              <div v-if="scope.row.name != userName">
+                <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
+                           type="text"
+                           @click="handleResetWord(scope.row)">
+                  <el-tooltip content="重置密码" effect="light" popper-class="fix-tooltip" placement="top">
+                    <img :src="passwordIcon" alt="重置密码" class="table-icon"/>
+                  </el-tooltip>
+                </el-button>
+                <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
+                           type="text"
+                           @click="handleRole(scope.row)"><el-tooltip content="分配角色" effect="light" popper-class="fix-tooltip" placement="top">
+                  <img :src="roleIcon" alt="分配角色" class="table-icon"/>
                 </el-tooltip>
-              </el-button>
-              <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
-                         type="text"
-                         @click="handleRole(scope.row)"><el-tooltip content="分配角色" effect="light" popper-class="fix-tooltip" placement="top">
-                <img :src="roleIcon" alt="分配角色" class="table-icon"/>
-              </el-tooltip>
-              </el-button>
-              <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
-                         type="text"
-                         @click="handleWork(scope.row)"><el-tooltip content="分配岗位" effect="light" popper-class="fix-tooltip" placement="top">
-                <img :src="positionIcon" alt="分配岗位" class="table-icon"/>
-              </el-tooltip>
-              </el-button>
-              <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-danger"
-                         type="text"
-                         @click="handleDelete(scope.row)">
-                <el-tooltip :content="scope.row.status == 1 ? '禁用' : '启用'" effect="light" popper-class="fix-tooltip" placement="top">
-                  <img v-if="scope.row.status == 1" :src="disabelIcon" alt="禁用" class="table-icon"/>
-                  <img v-else :src="archivedIcon" alt="启用" class="table-icon"/>
+                </el-button>
+                <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-primary"
+                           type="text"
+                           @click="handleWork(scope.row)"><el-tooltip content="分配岗位" effect="light" popper-class="fix-tooltip" placement="top">
+                  <img :src="positionIcon" alt="分配岗位" class="table-icon"/>
                 </el-tooltip>
-              </el-button>
-            </div>
-            <div v-else class="disable-text">当前用户禁止操作</div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <div class="paginationg-box">
-        <pagination :currentPage="userFrom.current" :pageSize="userFrom.size" :total="total"
-                    @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
-        </pagination>
+                </el-button>
+                <el-button :class="scope.row.name == userName ? 'disabled-btn' : 'text-btn'" class="btn-text-danger"
+                           type="text"
+                           @click="handleDelete(scope.row)">
+                  <el-tooltip :content="scope.row.status == 1 ? '禁用' : '启用'" effect="light" popper-class="fix-tooltip" placement="top">
+                    <img v-if="scope.row.status == 1" :src="disabelIcon" alt="禁用" class="table-icon"/>
+                    <img v-else :src="archivedIcon" alt="启用" class="table-icon"/>
+                  </el-tooltip>
+                </el-button>
+              </div>
+              <div v-else class="disable-text">当前用户禁止操作</div>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="paginationg-box">
+          <pagination :currentPage="userFrom.current" :pageSize="userFrom.size" :total="total"
+                      @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
+          </pagination>
+        </div>
       </div>
-    </div>
+    </section>
     <ConfirmDia v-if="showResetWordDia" :diaWidth="'600'" :isShow="showResetWordDia" :title="'重置密码'"
                 @closeDiaFn="showResetWordDia = false" @confirmFn="handleResetWordDia">
       <template #infoContent>
@@ -123,10 +125,10 @@
           <el-icon color="orange" size="20px" style="vertical-align: sub;">
             <WarningFilled/>
           </el-icon>
-          密码重置确认<br/>
-          您即将为账号 <span class="color-blue">[{{ passWordResetInfo.name }}]</span> 姓名 <span class="color-blue">[{{
-            passWordResetInfo.nickname
-          }}]</span> 进行密码重置
+          <span class="dialog-password-text">密码重置确认</span><br/>
+          <div class="dialog-password-sub-text">您即将为账号 <span class="color-blue">[{{ passWordResetInfo.name }}]</span> 姓名 <span class="color-blue">[{{
+              passWordResetInfo.nickname
+            }}]</span> 进行密码重置</div>
         </div>
       </template>
     </ConfirmDia>
@@ -338,44 +340,42 @@ onMounted(() => {
   background-color: #f6f8fc;
   height: 100%;
 
+  .search-content {
+    margin-top: 12px;
+    padding: 12px 16px;
+
+    .search-btn {
+      display: flex;
+      padding-right: 20px;
+    }
+
+  }
+
+  :deep(.el-form-item) {
+    margin-bottom: 0;
+  }
+
+  :deep(.el-input) {
+    --el-input-height: 28px;
+    --el-input-border-color: #DBDDE3;
+    --el-input-border-radius: 4px;
+    --el-input-padding-left: 10px;
+    --el-input-padding-right: 10px;
+    width: 260px;
+  }
+
+  :deep(.el-select__wrapper) {
+    min-height: 28px;
+    height: 28px;
+    border-radius: 4px;
+  }
+
   .page-search {
-    margin-bottom: 20px;
-
-    .search-content {
-      margin-top: 12px;
-      padding: 12px 16px;
-      background-color: #FFF;
-
-      .search-btn {
-        display: flex;
-        padding-right: 20px;
-      }
-
-    }
-
-    :deep(.el-form-item) {
-      margin-bottom: 0;
-    }
-
-    :deep(.el-input) {
-      --el-input-height: 28px;
-      --el-input-border-color: #DBDDE3;
-      --el-input-border-radius: 4px;
-      --el-input-padding-left: 10px;
-      --el-input-padding-right: 10px;
-      width: 260px;
-    }
-
-    :deep(.el-select__wrapper) {
-      min-height: 28px;
-      height: 28px;
-      border-radius: 4px;
-    }
+    margin-bottom: 16px;
   }
 
   .page-table {
-    padding: 12px 16px 0;
-    background: #fff;
+    padding: 0 16px;
 
     .title-2 {
       margin-bottom: 12px;
@@ -468,5 +468,23 @@ onMounted(() => {
   gap: 16px;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.table-wrapper{
+  border-radius: 8px;
+  background: #fff;
+}
+
+.dialog-password-text{
+  margin-left: 6px;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.dialog-password-sub-text{
+  color: #666;
+  font-size: 12px;
 }
 </style>

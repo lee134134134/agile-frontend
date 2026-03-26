@@ -25,3 +25,6 @@ export const configFn = (params) =>
 //角色-配置权限树形结构列表
 export const promissionTreeList = () =>
   noMegRequest.post("agile-biz/role/manage/tree/feature");
+//菜单列表
+export const menuList = () =>
+    noMegRequest.post("agile-biz/api/systemFeature/menu");

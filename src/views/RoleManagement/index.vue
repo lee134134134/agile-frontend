@@ -6,62 +6,64 @@
         <div class="opt-btn btn-margin-right" @click="handleAddFn">添加角色</div>
       </div>
     </div>
-    <div class="page-table">
-      <!-- <div class="title-2">用户列表</div> -->
-      <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit max-height="calc(100vh - 245px)" scrollbar-always-on
-                stripe style="width: 100%">
-        <el-table-column align="left" label="角色简称" min-width="100" prop="name">
-          <template #default="scope">
-            <span style="color:#2173F7;">{{ scope.row.name }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column align="left" label="角色名称" min-width="100" prop="displayName">
-        </el-table-column>
-        <el-table-column align="left" label="描述" min-width="300" prop="description"
-                         show-overflow-tooltip></el-table-column>
-        <el-table-column align="left" label="关联功能" prop="featureNames" width="550">
-          <template #default="scope">
+    <div class="page-table-wrapper">
+      <div class="page-table">
+        <!-- <div class="title-2">用户列表</div> -->
+        <el-table v-loading="loading" :data="tableData" :header-cell-style="TableRowStyle" fit max-height="calc(100vh - 245px)" scrollbar-always-on
+                  stripe style="width: 100%">
+          <el-table-column align="left" label="角色简称" min-width="100" prop="name">
+            <template #default="scope">
+              <span style="color:#2173F7;">{{ scope.row.name }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="left" label="角色名称" min-width="100" prop="displayName">
+          </el-table-column>
+          <el-table-column align="left" label="描述" min-width="300" prop="description"
+                           show-overflow-tooltip></el-table-column>
+          <el-table-column align="left" label="关联功能" prop="featureNames" width="550">
+            <template #default="scope">
 
-            <div class="featureNamesClass">
-              <div>{{ scope.row.featureNames ? scope.row.featureNames.length : '0' }}</div>
-              <ul v-if="scope.row.featureNames">
-                <li v-for="(item, index) in scope.row.featureNames.slice(0, 4)" :key="item">{{ item }}</li>
-              </ul>
-              <el-tooltip :content="scope.row.featureNameStr" effect="dark" placement="top"
-                          popper-class="roleModelTool">
-                <div v-if="scope.row.featureNames && scope.row.featureNames.length > 4" class="slh">.....
-                </div>
-              </el-tooltip>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column align="left" label="操作" width="150">
-          <template #default="scope">
-            <div v-if="scope.row.name == 'admin'" style="color:#b2b2b2;font-size: 14px;">当前角色禁止操作</div>
-            <div v-else>
-              <el-button class="btn-text-primary" type="text"
-                         @click="handleConfig(scope.row)"><el-tooltip content="权限分配" effect="light" popper-class="fix-tooltip" placement="top">
-                <img :src="powerIcon" alt="权限分配" class="table-icon"/>
-              </el-tooltip>
-              </el-button>
-              <el-button class="btn-text-primary" type="text" @click="handleEditFn(scope.row)">
-                <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
-                  <img :src="editIcon" alt="编辑" class="table-icon"/>
+              <div class="featureNamesClass">
+                <div>{{ scope.row.featureNames ? scope.row.featureNames.length : '0' }}</div>
+                <ul v-if="scope.row.featureNames">
+                  <li v-for="(item, index) in scope.row.featureNames.slice(0, 4)" :key="item">{{ item }}</li>
+                </ul>
+                <el-tooltip :content="scope.row.featureNameStr" effect="dark" placement="top"
+                            popper-class="roleModelTool">
+                  <div v-if="scope.row.featureNames && scope.row.featureNames.length > 4" class="slh">.....
+                  </div>
                 </el-tooltip>
-              </el-button>
-              <el-button class="btn-text-danger" type="text" @click="handleDelete(scope.row)">
-                <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
-                  <img :src="deleteIcon" alt="删除" class="table-icon"/>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column align="left" label="操作" width="150">
+            <template #default="scope">
+              <div v-if="scope.row.name == 'admin'" style="color:#b2b2b2;font-size: 14px;">当前角色禁止操作</div>
+              <div v-else>
+                <el-button class="btn-text-primary" type="text"
+                           @click="handleConfig(scope.row)"><el-tooltip content="权限分配" effect="light" popper-class="fix-tooltip" placement="top">
+                  <img :src="powerIcon" alt="权限分配" class="table-icon"/>
                 </el-tooltip>
-              </el-button>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <div class="paginationg-box">
-        <pagination :currentPage="userFrom.current" :pageSize="userFrom.size" :total="total"
-                    @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
-        </pagination>
+                </el-button>
+                <el-button class="btn-text-primary" type="text" @click="handleEditFn(scope.row)">
+                  <el-tooltip content="编辑" effect="light" popper-class="fix-tooltip" placement="top">
+                    <img :src="editIcon" alt="编辑" class="table-icon"/>
+                  </el-tooltip>
+                </el-button>
+                <el-button class="btn-text-danger" type="text" @click="handleDelete(scope.row)">
+                  <el-tooltip content="删除" effect="light" popper-class="fix-tooltip" placement="top">
+                    <img :src="deleteIcon" alt="删除" class="table-icon"/>
+                  </el-tooltip>
+                </el-button>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="paginationg-box">
+          <pagination :currentPage="userFrom.current" :pageSize="userFrom.size" :total="total"
+                      @currentPageCurrent="currentPageCurrent" @currentPageSize="currentPageSize">
+          </pagination>
+        </div>
       </div>
     </div>
     <RoleOperationComVue v-if="operateDetailShow" ref="dicTypeOptRef" :isShow="operateDetailShow" :roleInfo="roleDetail"
@@ -332,7 +334,7 @@ onMounted(() => {
       background: #2173F7;
       text-align: center;
       line-height: 24px;
-      font-size: 14px;
+      font-size: 12px;
       color: #fff;
       border-radius: 4px;
       margin-right: 12px;
@@ -350,7 +352,7 @@ onMounted(() => {
         color: #2173f7;
         border-radius: 4px;
         margin-right: 12px;
-        font-size: 14px;
+        font-size: 12px;
       }
     }
 
@@ -364,9 +366,15 @@ onMounted(() => {
       font-weight: bold;
       color: #2173f7;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 12px;
     }
   }
+}
+
+.page-table-wrapper{
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 8px;
 }
 </style>
 <style>

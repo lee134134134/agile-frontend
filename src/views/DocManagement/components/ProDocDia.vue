@@ -141,7 +141,8 @@ const defaultProps = ref({
   label: 'name',
   value: 'id',
   // multiple: true,
-  emitPath: false
+  // emitPath: false,
+  checkStrictly: true,
 })
 const addShow = ref(props.isShow ?? false)
 const title = ref(props.type || '新增')
@@ -208,6 +209,7 @@ const handleSubmit = () => {
     detailFromRef.value.validate((valid) => {
       if (valid) {
         detailFrom.projectCode = detailFrom.projectCode == '' ? '' : detailFrom.projectCode
+        if(detailFrom.module.length > 0) detailFrom.module = JSON.parse(JSON.stringify(detailFrom.module.join(',')));
         if (props.type == '新增') {
           emits('confirmFn', detailFrom)
           return
@@ -241,7 +243,8 @@ onBeforeMount(async () => {
   if (props.type != '新增') {
     detailFrom.projectCode = props.detailInfo.projectCode
     await handleModel(detailFrom.projectCode)
-    detailFrom.module = props.detailInfo.module
+    // detailFrom.module = props.detailInfo.module
+    detailFrom.module = props.detailInfo.module.split(',').map(Number)
     detailFrom.documentTitle = props.detailInfo.documentTitle
     detailFrom.archiveStatus = props.detailInfo.archiveStatus == 0 ? '0' : '1'
     detailFrom.versionNumber = props.detailInfo.versionNumber

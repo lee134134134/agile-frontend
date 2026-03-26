@@ -311,7 +311,7 @@ const handleEditSubFn = (form) => {
       operateType.value = ''
       detailInfo.value = null
       isOperateDia.value = false
-      ElMessage.success('操作成功！')
+      ElMessage.success({message: '操作成功！', duration: 1500})
       getList()
     }
   })
@@ -327,7 +327,7 @@ const handleDele = (data) => {
   }).then(() => {
     deleKnowledgeDocFn({id: data.id}).then(res => {
       if (res.success) {
-        ElMessage.success('操作成功！')
+        ElMessage.success({message: '操作成功！', duration: 1500})
         getList()
       }
     })
@@ -343,7 +343,7 @@ const handleRelease = (data) => {
   }
   editKnowledgeDocFn(form).then(res => {
     if (res.success) {
-      ElMessage.success('操作成功！')
+      ElMessage.success({message: '操作成功！', duration: 1500})
       getList()
     }
   })
@@ -388,7 +388,7 @@ const handleAddEditor = (data) => {
   //保存编辑器内容
   $http.put(`agile-biz/api/knowledge/documents/upload`, data).then(res => {
     if (res.success) {
-      ElMessage.success('文档保存成功！')
+      ElMessage.success({message: '文档保存成功！', duration: 1500})
       emitRef.value.getHistoryListFn()
       // getList()
       // isEditComShow.value = false
@@ -401,7 +401,7 @@ const handleUpDateEditor = (data) => {
   //自动保存
   $http.put(`agile-biz/api/knowledge/documents/upload`, data).then(res => {
     if (res.success) {
-      ElMessage.success('自动保存成功！')
+      ElMessage.success({message: '自动保存成功！', duration: 1500})
       editorParams.value.date = res.data.updatedAt
     }
   })

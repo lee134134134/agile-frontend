@@ -169,7 +169,7 @@ onBeforeMount(async () => {
   width: calc(100% - 10px);
   margin-top: 20px;
   padding-right: 10px;
-  height: calc(100vh - 205px);
+  height: calc(100vh - 120px);
   overflow-y: auto;
 
   .view-card {

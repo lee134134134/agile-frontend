@@ -27,7 +27,7 @@
             {{ diaForm.date }}
           </div>
         </el-tooltip>
-        <div v-show="typeval == 2" class="opt-text" @click="isHistoryShow = !isHistoryShow">当前版本</div>
+        <div v-show="typeval == 2" class="opt-text" @click="isHistoryShow = !isHistoryShow">历史版本</div>
       </div>
       <div class="main-container jus-bet-start">
         <div v-show="isHistoryShow" class="container-left">
@@ -186,22 +186,28 @@ function getHistoryListFn() {
 
 const saveAsPdf = async () => {
   // 1. 创建一个临时容器来渲染 HTML
-  const editorElement = document.querySelector('.ce-page-container');
-  if (!editorElement) return;
-  // 2. 将 HTML 转为 Canvas
-  // scale 提高清晰度
-  const canvas = await html2canvas(editorElement, {
-    scale: 2,
-    useCORS: true, // 允许跨域图片
-  });
-  const imgData = canvas.toDataURL('image/png');
+  const container = document.querySelector('.ce-page-container');
+  if (!container) return;
+  // 2. 获取容器内所有的canvas元素
+  const canvases = container.querySelectorAll('canvas');
+  if(canvases.length === 0) return;
   // 3. 计算 PDF 页面大小
   const pdf = new jsPDF('p', 'mm', 'a4');
-  const imgProps = pdf.getImageProperties(imgData);
   const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  const pdfHeight = pdf.internal.pageSize.getHeight();
+
+  for (let i =0; i < canvases.length; i++) {
+    if(i > 0) pdf.addPage()
+    const pageCanvas = await html2canvas(canvases[i],{
+      scale: 1.5,
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff'
+    });
+    const imgData = pageCanvas.toDataURL('image/jpeg', 0.75);
+    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
+  }
   // 4. 核心区别：获取 Blob 对象
-  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
   return pdf.output('blob')
 };
 

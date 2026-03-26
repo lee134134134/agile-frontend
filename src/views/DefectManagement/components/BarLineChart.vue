@@ -16,7 +16,7 @@ import {onBeforeUnmount, onMounted, ref, watch} from 'vue';
 const props = defineProps({
   chartId: {type: String, default: 'chart'}, // 图表唯一标识
   width: {type: String, default: '100%'}, // 宽度
-  height: {type: String, default: '300px'}, // 高度
+  height: {type: String, default: '240px'}, // 高度
   data: {type: Object, default: () => ({})}, // 数据对象，需包含x轴类别与多系列数据
   chartTitle: {type: String, default: ''},
   rotateDeg: {type: Boolean, default: false},
